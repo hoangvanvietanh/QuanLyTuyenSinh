@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="377.0" prefWidth="746.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.gdu.controller.StudentController">
+  <children>
+    <TableView fx:id="tbData" layoutX="60.0" layoutY="154.0" prefHeight="209.0" prefWidth="627.0">
+      <columns>
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="77.0" text="Mã SV" fx:id="student_code" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="178.0" text="Họ tên" fx:id="full_name" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="80.0" text="Giới tính" fx:id="sex" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="CMND" fx:id="identity_card_number" />
+        <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Ngày sinh" fx:id="date_of_birth" />
+      </columns>
+    </TableView>
+  </children>
+</AnchorPane>
