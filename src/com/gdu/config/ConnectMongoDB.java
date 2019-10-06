@@ -16,7 +16,7 @@ import com.mongodb.client.MongoDatabase;
 public class ConnectMongoDB {
 
 	String database_name = "gia_dinh_university";
-	String collection_name = "students";
+	String collection_name = "test";
 	
 	MongoClientURI uri = new MongoClientURI(
 			"mongodb+srv://vietanh:113114115@cluster0-jfbgb.mongodb.net/test?retryWrites=true&w=majority");

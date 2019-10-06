@@ -55,7 +55,13 @@ public class Model {
 	{
 		Document doc = new Document();
 		doc =  Document.parse(g.toJson(student));
-		Bson filter = Filters.eq("identity_card_number", "025899331");
+		Bson filter = Filters.eq("student_code", student.getStudent_code());
 		mongoDB.collectionStudent().replaceOne(filter, doc);
+	}
+	
+	public void deleteStudents(String studentCode)
+	{
+		Bson filter = Filters.eq("student_code", studentCode);
+		mongoDB.collectionStudent().deleteOne(filter);
 	}
 }

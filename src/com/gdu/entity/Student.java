@@ -19,13 +19,27 @@ public class Student {
 	private String status;
 	
 	
+	public Student() {
 
+	}
 	
 	
-	public Student(String full_name, String student_code) {
+	public Student(String full_name, String student_code, String sex, String identity_card_number,
+			String date_of_birth,String password) {
+		super();
 		this.full_name = full_name;
 		this.student_code = student_code;
+		this.sex = sex;
+		this.identity_card_number = identity_card_number;
+		this.date_of_birth = date_of_birth;
+		this.password = password;
 	}
+
+
+//	public Student(String full_name, String student_code) {
+//		this.full_name = full_name;
+//		this.student_code = student_code;
+//	}
 
 	public String getStatus() {
 		return status;
