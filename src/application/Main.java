@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 
 public class Main extends Application {
@@ -17,7 +16,7 @@ public class Main extends Application {
 			Model model = new Model();
 			model.getAllStudent();
 			Parent root = FXMLLoader.load(getClass()
-	                   .getResource("../com/gdu/view/login.fxml"));
+	                   .getResource("../com/gdu/view/test.fxml"));
 	           primaryStage.setTitle("My Application");
 	           primaryStage.setScene(new Scene(root));
 	           primaryStage.show();

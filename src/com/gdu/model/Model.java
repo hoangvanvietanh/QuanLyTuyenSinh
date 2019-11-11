@@ -37,18 +37,9 @@ public class Model {
 	
 	public void insertStudents(Student student)
 	{
-//		student.setStudent_code("456");
-		
 		Document doc = new Document();
 		doc =  Document.parse(g.toJson(student));
-//		System.out.println(doc);
 		mongoDB.collectionStudent().insertOne(doc);
-//		String test = "{'identity_card_number':'025899331'}";
-//		Document query = new Document();
-//		query = Document.parse(test);
-//		System.out.println(query);
-		
-		
 	}
 	
 	public void updateStudents(Student student)

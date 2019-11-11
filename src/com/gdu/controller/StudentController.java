@@ -11,8 +11,10 @@ import javax.swing.JOptionPane;
 import org.mindrot.jbcrypt.BCrypt;
 
 import com.gdu.entity.Student;
+import com.gdu.entity.StudentClass;
 import com.gdu.model.Model;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -29,7 +31,7 @@ public class StudentController implements Initializable{
 
     public List<Student> listStudent = Model.studentList;
     public Model model = new Model();
-	
+   
 	
 	@FXML
     private TableView<Student> tbData;
@@ -43,6 +45,9 @@ public class StudentController implements Initializable{
     public TableColumn<Student, String> date_of_birth;
     @FXML
     public TableColumn<Student, String> sex;
+    
+    @FXML
+    public TableColumn<Student, String> nameOfClass;
     
     @FXML
     public TextField txtMSSV;
@@ -93,6 +98,9 @@ public class StudentController implements Initializable{
         	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         	LocalDate dateOfBirth = LocalDate.parse(datePickerDateOfBirth.getValue().toString());
         	Student sv = new Student(txtHoTen.getText(), txtMSSV.getText(),gioiTinh,txtCMND.getText(),formatter.format(dateOfBirth).toString(), BCrypt.hashpw(txtMSSV.getText(), BCrypt.gensalt()));
+        	StudentClass svClass = new StudentClass();
+        	svClass.setClass_name("");
+        	sv.setStudent_class(svClass);
         	listStudent.add(sv);
         	model.insertStudents(sv);
         	loadData();
@@ -199,13 +207,14 @@ public class StudentController implements Initializable{
 	}
 	
 	public void loadData()
-	{
+	{                    
 		full_name.setCellValueFactory(new PropertyValueFactory<Student,String>("full_name"));
 		student_code.setCellValueFactory(new PropertyValueFactory<Student,String>("student_code"));
 		sex.setCellValueFactory(new PropertyValueFactory<Student,String>("sex"));
 		identity_card_number.setCellValueFactory(new PropertyValueFactory<Student,String>("identity_card_number"));
 		date_of_birth.setCellValueFactory(new PropertyValueFactory<Student,String>("date_of_birth"));
-		
+		nameOfClass.setCellValueFactory(cellData -> 
+	    new SimpleStringProperty(cellData.getValue().getStudent_class().getClass_name()));
 		ObservableList<Student> student = FXCollections.observableArrayList(listStudent);
 		tbData.setItems(student);
 	}

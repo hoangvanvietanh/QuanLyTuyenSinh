@@ -22,15 +22,16 @@
               <TableColumn fx:id="sex" maxWidth="5000.0" minWidth="10.0" prefWidth="80.0" text="Giới tính" />
               <TableColumn fx:id="identity_card_number" maxWidth="5000.0" minWidth="10.0" prefWidth="109.0" text="CMND" />
               <TableColumn fx:id="date_of_birth" maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Ngày sinh" />
+                  <TableColumn fx:id="nameOfClass" maxWidth="5000.0" minWidth="10.0" prefWidth="111.0" text="Lớp" />
             </columns>
           </TableView>
-            <TextField fx:id="txtMSSV" layoutX="88.0" layoutY="12.0" prefHeight="7.0" prefWidth="184.0" />
-            <Label layoutX="29.0" layoutY="25.0" text="Mã SV" />
+            <TextField fx:id="txtMSSV" layoutX="100.0" layoutY="12.0" prefHeight="7.0" prefWidth="184.0" />
+            <Label layoutX="29.0" layoutY="17.0" text="Mã SV" />
             <Label layoutX="28.0" layoutY="55.0" text="Họ tên" />
             <Label layoutX="346.0" layoutY="25.0" text="Giới tính" />
             <Label layoutX="351.0" layoutY="61.0" text="CMND" />
             <Label layoutX="28.0" layoutY="93.0" text="Ngày sinh" />
-            <TextField fx:id="txtHoTen" layoutX="88.0" layoutY="43.0" prefHeight="28.0" prefWidth="184.0" />
+            <TextField fx:id="txtHoTen" layoutX="100.0" layoutY="47.0" prefHeight="28.0" prefWidth="184.0" />
             <TextField fx:id="txtCMND" layoutX="412.0" layoutY="50.0" prefHeight="28.0" prefWidth="184.0" />
             <Button layoutX="351.0" layoutY="102.0" mnemonicParsing="false" onAction="#btnThem" text="Thêm" />
             <Button layoutX="448.0" layoutY="102.0" mnemonicParsing="false" onAction="#btnXoa" text="Xóa" />
@@ -41,7 +42,7 @@
                </toggleGroup>
             </RadioButton>
             <RadioButton fx:id="radNu" layoutX="512.0" layoutY="19.0" mnemonicParsing="false" text="Nữ" toggleGroup="$grGioiTinh" />
-            <DatePicker fx:id="datePickerDateOfBirth" layoutX="90.0" layoutY="89.0" />
+            <DatePicker fx:id="datePickerDateOfBirth" layoutX="100.0" layoutY="89.0" />
             <Button layoutX="622.0" layoutY="105.0" mnemonicParsing="false" onAction="#btnTaoMoi" text="Tạo mới" />
          </children>
       </Pane>

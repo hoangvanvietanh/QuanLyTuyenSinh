@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import de.jensd.fx.glyphs.testapps.GlyphsBrowser?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="386.0" prefWidth="738.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.TestController">
+   <children>
+      <AnchorPane layoutX="176.0" prefHeight="323.0" prefWidth="379.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <effect>
+            <DropShadow />
+         </effect>
+         <children>
+            <Pane fx:id="paneSinhVien" prefHeight="333.0" prefWidth="389.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Pane fx:id="pane3" prefHeight="333.0" prefWidth="389.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <GlyphsBrowser layoutY="8.0" prefHeight="292.0" prefWidth="379.0" />
+               </children>
+            </Pane>
+            <BorderPane fx:id="paneTrangChu" prefHeight="386.0" prefWidth="563.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <center>
+                  <TableView prefHeight="269.0" prefWidth="545.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="STT" />
+                      <TableColumn prefWidth="75.0" text="Họ tên" />
+                    </columns>
+                  </TableView>
+               </center>
+               <top>
+                  <Pane prefHeight="80.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label layoutX="195.0" layoutY="14.0" text="Quản lý sinh viên">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                        <TextField layoutX="14.0" layoutY="46.0" prefHeight="26.0" prefWidth="213.0" />
+                        <JFXButton layoutX="234.0" layoutY="46.0" style="-fx-background-color: green;">
+                           <graphic>
+                              <FontAwesomeIcon iconName="SEARCH" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </top>
+               <left>
+                  <Pane prefHeight="314.0" prefWidth="10.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Pane prefHeight="263.0" prefWidth="8.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+               </right>
+               <bottom>
+                  <Pane prefHeight="9.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+               </bottom>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="323.0" prefWidth="173.0" style="-fx-background-color: #d3e0e3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="-1.0" prefHeight="323.0" prefWidth="44.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </AnchorPane>
+            <JFXButton fx:id="buttonTrangChu" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="14.0" onAction="#buttonTrangChuClicked" prefHeight="47.0" prefWidth="176.0" text="Trang chủ">
+               <graphic>
+                  <FontAwesomeIcon iconName="HOME" size="1.5em" />
+               </graphic></JFXButton>
+            <JFXButton fx:id="buttonSinhVien" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="61.0" onAction="#buttonSinhVienClicked" prefHeight="47.0" prefWidth="176.0" text="Sinh viên">
+               <graphic>
+                  <FontAwesomeIcon iconName="USER" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="button3" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="108.0" onAction="#button3Clicked" prefHeight="47.0" prefWidth="176.0" text="Đăng ký">
+               <graphic>
+                  <FontAwesomeIcon iconName="PLUS" size="1.5em" />
+               </graphic>
+            </JFXButton>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+   </children>
+</AnchorPane>
