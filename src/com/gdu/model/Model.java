@@ -9,6 +9,7 @@ import org.bson.conversions.Bson;
 import com.gdu.config.ConnectMongoDB;
 import com.gdu.entity.Scores;
 import com.gdu.entity.Student;
+import com.gdu.entity.StudentRegistration;
 import com.google.gson.Gson;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -36,6 +37,13 @@ public class Model {
 	}
 	
 	public void insertStudents(Student student)
+	{
+		Document doc = new Document();
+		doc =  Document.parse(g.toJson(student));
+		mongoDB.collectionStudent().insertOne(doc);
+	}
+	
+	public void insertStudents(StudentRegistration student)
 	{
 		Document doc = new Document();
 		doc =  Document.parse(g.toJson(student));

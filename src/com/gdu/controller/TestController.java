@@ -7,32 +7,49 @@ import com.jfoenix.controls.JFXButton;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class TestController implements Initializable {
 
 	@FXML
-	private Pane paneTrangChu, paneSinhVien, pane3;
+	private Pane paneHome, paneStudent, pane3;
 
 	@FXML
-	private JFXButton buttonTrangChu, buttonSinhVien, button3;
+	private JFXButton buttonHome, buttonStudent;
 
 	@FXML
-	public void buttonTrangChuClicked() {
-		paneTrangChu.toFront();
-
-	}
-	
-	@FXML
-	public void buttonSinhVienClicked() {
-		paneSinhVien.toFront();
+	public void buttonHomeClicked() {
+		paneHome.toFront();
 
 	}
 	
 	@FXML
-	public void button3Clicked() {
-		pane3.toFront();
+	public void buttonStudentClicked() {
+		paneStudent.toFront();
+
+	}
+	
+	@FXML
+	public void btnRegistrationClicked() {
+		try {
+		    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
+		    Parent root1 = (Parent) fxmlLoader.load();
+		    Stage stage = new Stage();
+		    stage.initModality(Modality.APPLICATION_MODAL);
+		    stage.initStyle(StageStyle.UNDECORATED);
+		    stage.setTitle("ABC");
+		    stage.setScene(new Scene(root1));  
+		    stage.show();
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
 

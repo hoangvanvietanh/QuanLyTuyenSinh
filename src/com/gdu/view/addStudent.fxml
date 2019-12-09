@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="553.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.AddStudentController">
+   <children>
+      <ScrollPane prefHeight="932.0" prefWidth="761.0" AnchorPane.bottomAnchor="52.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="957.0" prefWidth="779.0">
+               <children>
+                  <HBox alignment="TOP_CENTER" prefHeight="25.0" prefWidth="746.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label alignment="TOP_CENTER" text="THÔNG TIN SINH VIÊN">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="42.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <VBox prefHeight="242.0" prefWidth="749.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="THÔNG TIN CHUNG" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="68.0" text="Mã SV" />
+                                    <JFXTextField fx:id="txtStudentCode" prefHeight="26.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Họ tên" />
+                                    <JFXTextField fx:id="txtFullName" prefHeight="26.0" prefWidth="169.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Ngày sinh" />
+                                    <JFXDatePicker fx:id="dateOfBirth" prefHeight="29.0" prefWidth="319.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Nơi sinh" />
+                                    <JFXTextField fx:id="txtPlaceOfBirth" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="122.0" text="Giới tính" />
+                                    <JFXRadioButton fx:id="radMale" prefHeight="16.0" prefWidth="104.0" text="Nam">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="Gender" />
+                                       </toggleGroup>
+                                    </JFXRadioButton>
+                                    <JFXRadioButton fx:id="radFemale" prefHeight="16.0" prefWidth="160.0" text="Nữ" toggleGroup="$Gender" />
+                                    <Label text="Số CMND" />
+                                    <JFXTextField fx:id="txtIdOfStudent" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="68.0" text="Khu vực">
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </HBox.margin>
+                                    </Label>
+                                    <JFXComboBox fx:id="cbCodeOfPlace" prefHeight="26.0" prefWidth="315.0" HBox.hgrow="ALWAYS" />
+                                    <Label prefHeight="16.0" prefWidth="94.0" text="Số điện thoại" />
+                                    <JFXTextField fx:id="txtPhoneNumber" prefHeight="26.0" prefWidth="274.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Ngày nhập học" />
+                                    <JFXDatePicker fx:id="dateApply" prefHeight="29.0" prefWidth="280.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Ngành đăng ký" />
+                                    <JFXComboBox fx:id="cbMajor" prefHeight="26.0" prefWidth="272.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="261.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <VBox prefHeight="15.0" prefWidth="746.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="THÔNG TIN HỘ KHẨU" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="79.0" text="Địa chỉ" />
+                                    <JFXTextField fx:id="txtAddress" prefHeight="26.0" prefWidth="146.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Phường xã" />
+                                    <JFXTextField fx:id="txtSubDistrict" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Quận huyện" />
+                                    <JFXTextField fx:id="txtDistrict" prefHeight="26.0" prefWidth="147.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Tỉnh thành" />
+                                    <JFXTextField fx:id="txtProvince" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="362.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <VBox prefHeight="15.0" prefWidth="746.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="THÔNG TIN HỒ SƠ" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <JFXCheckBox fx:id="checkboxRegistrationForm" prefHeight="18.0" prefWidth="223.0" text="Phiếu đăng ký" HBox.hgrow="ALWAYS" />
+                                    <JFXCheckBox fx:id="checkboxPriorityPaper" layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="172.0" text="Giấy ưu tiên" HBox.hgrow="ALWAYS" />
+                                    <JFXCheckBox fx:id="checkboxSchoolReport" layoutX="101.0" layoutY="10.0" prefHeight="18.0" prefWidth="160.0" text="Học bạ" HBox.hgrow="ALWAYS" />
+                                    <JFXCheckBox fx:id="checkboxDiploma" layoutX="192.0" layoutY="10.0" prefHeight="18.0" prefWidth="188.0" text="Bằng tốt nghiệp" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                                 <children>
+                                    <JFXCheckBox fx:id="checkboxGraduationCertificate" prefHeight="18.0" prefWidth="223.0" text="Giấy chứng nhận tốt nghiệp" HBox.hgrow="ALWAYS" />
+                                    <JFXCheckBox fx:id="checkboxCopyOfID" prefHeight="18.0" prefWidth="173.0" text="Bản sao CMND" HBox.hgrow="ALWAYS" />
+                                    <JFXCheckBox fx:id="checkboxImage" prefHeight="18.0" prefWidth="159.0" text="Ảnh 4x6" HBox.hgrow="ALWAYS" />
+                                    <JFXCheckBox fx:id="checkboxBirthCertificate" prefHeight="18.0" prefWidth="188.0" text="Giấy khai sinh" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="449.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <VBox prefHeight="15.0" prefWidth="746.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="THÔNG TIN PHỤ HUYNH" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Họ tên cha" />
+                                    <JFXTextField fx:id="txtNameOfFather" prefHeight="26.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Số điện thoại" />
+                                    <JFXTextField fx:id="txtPhoneNumberOfFather" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Họ tên mẹ" />
+                                    <JFXTextField fx:id="txtNameOfMother" prefHeight="26.0" prefWidth="166.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Số điện thoại" />
+                                    <JFXTextField fx:id="txtPhoneNumberOfMother" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="551.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <VBox prefHeight="15.0" prefWidth="746.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="ĐIỂM HỌC BẠ" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Toán" />
+                                    <JFXTextField fx:id="txtMathScoresInSchoolReport" prefHeight="26.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Hóa" />
+                                    <JFXTextField fx:id="txtChemistryScoresInSchoolReport" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="33.0" text="Lý" />
+                                    <JFXTextField fx:id="txtPhysicsScoresInSchoolReport" prefHeight="26.0" prefWidth="166.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Văn" />
+                                    <JFXTextField fx:id="txtLiteraryScoresInSchoolReport" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="664.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0">
+                     <children>
+                        <VBox prefHeight="15.0" prefWidth="746.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="ĐIỂM THI TỐT NGHIỆP" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Toán" />
+                                    <JFXTextField fx:id="txtMathScoresOfGraduationTest" prefHeight="26.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Hóa" />
+                                    <JFXTextField fx:id="txtChemistryScoresOfGraduationTest" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="31.0" text="Lý" />
+                                    <JFXTextField fx:id="txtPhysicsScoresOfGraduationTest" prefHeight="26.0" prefWidth="164.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Văn" />
+                                    <JFXTextField fx:id="txtLiteraryScoresOfGraduationTest" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="777.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <children>
+                        <VBox prefHeight="15.0" prefWidth="746.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="HỌC CẤP 3 TẠI" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="76.0" text="Tên trường" />
+                                    <JFXTextField fx:id="txtAddressSchool" prefHeight="26.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Quận huyện" />
+                                    <JFXTextField fx:id="txtDistrictSchool" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="26.0" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label prefHeight="16.0" prefWidth="76.0" text="Phường xã" />
+                                    <JFXTextField fx:id="txtSubDistrictSchool" prefHeight="26.0" prefWidth="158.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Thành phố" />
+                                    <JFXTextField fx:id="txtProvinceSchool" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="15.0" layoutY="890.0" prefHeight="67.0" prefWidth="746.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+                     <children>
+                        <VBox prefHeight="15.0" prefWidth="746.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="THÔNG TIN KHÁC" underline="true">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <Label text="Địa chỉ trọ" />
+                                    <JFXTextField fx:id="txtAddressNow" prefHeight="26.0" prefWidth="162.0" HBox.hgrow="ALWAYS" />
+                                    <Label text="Ghi chú" />
+                                    <JFXTextArea fx:id="txtNotes" prefHeight="39.0" prefWidth="305.0" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <HBox alignment="TOP_CENTER" layoutX="7.0" layoutY="950.0" prefHeight="46.0" prefWidth="797.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <JFXButton onAction="#saveClicked" prefHeight="36.0" prefWidth="765.0" text="Lưu" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontAwesomeIcon iconName="SAVE" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

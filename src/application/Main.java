@@ -16,7 +16,7 @@ public class Main extends Application {
 			Model model = new Model();
 			model.getAllStudent();
 			Parent root = FXMLLoader.load(getClass()
-	                   .getResource("../com/gdu/view/test.fxml"));
+	                   .getResource("../com/gdu/view/home.fxml"));
 	           primaryStage.setTitle("My Application");
 	           primaryStage.setScene(new Scene(root));
 	           primaryStage.show();
