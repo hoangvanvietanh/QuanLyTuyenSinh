@@ -1,5 +1,7 @@
 package com.gdu.entity;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class StudentRegistration {
 
 	//Thông tin chung
@@ -74,6 +76,18 @@ public class StudentRegistration {
 	
 	private String notes;
 
+	private String status;
+	
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public String getStudentCode() {
 		return studentCode;
 	}
@@ -83,6 +97,10 @@ public class StudentRegistration {
 	}
 
 	public String getFullName() {
+		if (fullName == null)
+		{
+			fullName = "firstName";
+		}
 		return fullName;
 	}
 

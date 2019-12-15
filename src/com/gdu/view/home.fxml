@@ -3,99 +3,240 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import de.jensd.fx.glyphs.testapps.GlyphsBrowser?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="510.0" prefWidth="965.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.TestController">
-   <children>
-      <AnchorPane layoutX="193.0" prefHeight="510.0" prefWidth="772.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <effect>
-            <DropShadow />
-         </effect>
-         <children>
-            <Pane fx:id="pane3" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <GlyphsBrowser layoutY="8.0" prefHeight="374.0" prefWidth="563.0" />
-               </children>
-            </Pane>
-            <Pane fx:id="paneHome" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: green;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <BorderPane fx:id="paneStudent" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<AnchorPane fx:id="stageHome" prefHeight="510.0" prefWidth="1299.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.TestController">
+	<children>
+		<AnchorPane layoutX="193.0" prefHeight="510.0" prefWidth="771.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+			<effect>
+				<DropShadow />
+			</effect>
+			<children>
+				<Pane fx:id="pane3" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<GlyphsBrowser layoutY="8.0" prefHeight="374.0" prefWidth="563.0" />
+					</children>
+				</Pane>
+				<Pane fx:id="paneHome" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<LineChart layoutX="10.0" layoutY="278.0" prefHeight="218.0" prefWidth="736.0">
+							<xAxis>
+								<CategoryAxis side="BOTTOM" />
+							</xAxis>
+							<yAxis>
+								<NumberAxis side="LEFT" />
+							</yAxis>
+						</LineChart>
+						<HBox layoutY="52.0" prefHeight="100.0" prefWidth="756.0">
+							<children>
+								<VBox alignment="CENTER" prefHeight="100.0" prefWidth="268.0" HBox.hgrow="ALWAYS">
+									<children>
+										<Label text="100" textFill="#6b1818">
+											<font>
+												<Font name="System Bold" size="34.0" />
+											</font>
+											<effect>
+												<Lighting>
+													<bumpInput>
+														<Shadow />
+													</bumpInput>
+													<light>
+														<Light.Distant />
+													</light>
+												</Lighting>
+											</effect>
+										</Label>
+										<Label alignment="TOP_CENTER" text="Học sinh đang học">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Label>
+									</children>
+								</VBox>
+								<VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="351.0">
+									<children>
+										<Label text="100" textFill="#6b1818">
+											<font>
+												<Font name="System Bold" size="34.0" />
+											</font>
+											<effect>
+												<Lighting>
+													<bumpInput>
+														<Shadow />
+													</bumpInput>
+													<light>
+														<Light.Distant />
+													</light>
+												</Lighting>
+											</effect>
+										</Label>
+										<Label alignment="TOP_CENTER" text="Học sinh đăng ký">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Label>
+									</children>
+								</VBox>
+								<VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="273.0">
+									<children>
+										<Label text="100" textFill="#6b1818">
+											<font>
+												<Font name="System Bold" size="34.0" />
+											</font>
+											<effect>
+												<Lighting>
+													<bumpInput>
+														<Shadow />
+													</bumpInput>
+													<light>
+														<Light.Distant />
+													</light>
+												</Lighting>
+											</effect>
+										</Label>
+										<Label alignment="TOP_CENTER" text="Học sinh chờ xét duyệt">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Label>
+									</children>
+								</VBox>
+							</children>
+						</HBox>
+						<HBox alignment="CENTER" layoutX="1.0" layoutY="-3.0" prefHeight="59.0" prefWidth="756.0">
+							<children>
+								<Label alignment="TOP_CENTER" text="Trang chủ" textAlignment="CENTER">
+									<font>
+										<Font name="System Bold" size="30.0" />
+									</font>
+								</Label>
+							</children>
+						</HBox>
+						<ScrollPane layoutX="31.0" layoutY="173.0" prefHeight="112.0" prefWidth="700.0">
+							<content>
+								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="196.0" />
+							</content>
+						</ScrollPane>
+						<HBox alignment="CENTER" layoutX="11.0" layoutY="143.0" prefHeight="28.0" prefWidth="736.0">
+							<children>
+								<Label text="Thông báo" />
+							</children>
+						</HBox>
+					</children>
+				</Pane>
+				<BorderPane fx:id="paneStudent" layoutX="16.0" prefHeight="510.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<top>
+						<Pane prefHeight="80.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+							<children>
+								<Label layoutX="195.0" layoutY="14.0" text="Quản lý sinh viên">
+									<font>
+										<Font size="20.0" />
+									</font>
+								</Label>
+								<TextField layoutX="14.0" layoutY="46.0" prefHeight="26.0" prefWidth="213.0" />
+								<JFXButton layoutX="234.0" layoutY="46.0" style="-fx-background-color: #ede8da;" text="Tìm kiếm">
+									<graphic>
+										<FontAwesomeIcon iconName="SEARCH" />
+									</graphic>
+								</JFXButton>
+								<JFXButton fx:id="btnRegistration" alignment="BASELINE_LEFT" layoutX="336.0" layoutY="44.0" onAction="#btnRegistrationClicked" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ede8da;" text="Đăng ký">
+									<graphic>
+										<FontAwesomeIcon iconName="PLUS" size="1.5em" />
+									</graphic>
+								</JFXButton>
+								<JFXButton alignment="BASELINE_LEFT" layoutX="446.0" layoutY="44.0" onAction="#reportClicked" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #ede8da;" text="Xuất file">
+									<graphic>
+										<FontAwesomeIcon iconName="FILE" size="1.5em" />
+									</graphic>
+								</JFXButton>
+							</children>
+						</Pane>
+					</top>
+					<left>
+						<Pane prefHeight="314.0" prefWidth="10.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+					</left>
+					<right>
+						<Pane prefHeight="263.0" prefWidth="8.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+					</right>
+					<bottom>
+						<Pane prefHeight="9.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+					</bottom>
                <center>
-                  <TableView prefHeight="421.0" prefWidth="743.0" BorderPane.alignment="CENTER">
-                    <columns>
-                      <TableColumn prefWidth="48.0" text="STT" />
-                      <TableColumn prefWidth="102.0" text="Họ tên" />
-                        <TableColumn prefWidth="114.0" text="Ngay Sinh" />
-                        <TableColumn prefWidth="92.0" text="Họ tên" />
-                    </columns>
-                  </TableView>
+                  <ScrollPane prefHeight="421.0" prefWidth="1074.0" BorderPane.alignment="CENTER">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="1050.0">
+                           <children>
+                              <TableView fx:id="tbData" layoutX="99.0" layoutY="48.0" onMouseClicked="#btnSelectedRow" prefHeight="421.0" prefWidth="982.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+                              <columns>
+								<TableColumn fx:id="stt" prefWidth="48.0" text="STT" />
+								<TableColumn fx:id="full_name" prefWidth="237.0" text="Họ tên" />
+								<TableColumn fx:id="date_of_birth" prefWidth="127.0" text="Ngày sinh" />
+								<TableColumn fx:id="place_of_birth" prefWidth="123.0" text="Nơi sinh" />
+								<TableColumn maxWidth="590.0" prefWidth="124.0" text="Điểm thi đại học">
+									<columns>
+										<TableColumn fx:id="math_scores_US" prefWidth="50.0" text="Toán" />
+										<TableColumn fx:id="physical_scores_US" prefWidth="49.0" text="Lý" />
+										<TableColumn fx:id="chemistry_scores_US" prefWidth="46.0" text="Hóa" />
+										<TableColumn fx:id="literature_scores_US" prefWidth="56.0" text="Văn" />
+									</columns>
+								</TableColumn>
+								<TableColumn prefWidth="849.0" text="Điểm học bạ">
+									<columns>
+										<TableColumn fx:id="math_scores" prefWidth="53.0" text="Toán" />
+										<TableColumn fx:id="physical_scores" prefWidth="51.0" text="Lý" />
+										<TableColumn fx:id="chemistry_scores" prefWidth="50.0" text="Hóa" />
+										<TableColumn fx:id="literature_scores" prefWidth="55.0" text="Văn" />
+									</columns>
+								</TableColumn>
+                                    <TableColumn fx:id="status" prefWidth="123.0" text="Trạng thái" />
+							</columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </center>
-               <top>
-                  <Pane prefHeight="80.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label layoutX="195.0" layoutY="14.0" text="Quản lý sinh viên">
-                           <font>
-                              <Font size="20.0" />
-                           </font>
-                        </Label>
-                        <TextField layoutX="14.0" layoutY="46.0" prefHeight="26.0" prefWidth="213.0" />
-                        <JFXButton layoutX="234.0" layoutY="46.0" style="-fx-background-color: #ede8da;" text="Tìm kiếm">
-                           <graphic>
-                              <FontAwesomeIcon iconName="SEARCH" />
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton fx:id="btnRegistration" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="341.0" layoutY="44.0" onAction="#btnRegistrationClicked" prefHeight="30.0" prefWidth="127.0" text="Đăng ký">
-                           <graphic>
-                              <FontAwesomeIcon iconName="PLUS" size="1.5em" />
-                           </graphic>
-                        </JFXButton>
-                        <JFXButton alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="482.0" layoutY="44.0" prefHeight="30.0" prefWidth="136.0" text="Xuất file">
-                           <graphic>
-                              <FontAwesomeIcon iconName="FILE" size="1.5em" />
-                           </graphic>
-                        </JFXButton>
-                     </children>
-                  </Pane>
-               </top>
-               <left>
-                  <Pane prefHeight="314.0" prefWidth="10.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
-               </left>
-               <right>
-                  <Pane prefHeight="263.0" prefWidth="8.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
-               </right>
-               <bottom>
-                  <Pane prefHeight="9.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
-               </bottom>
-            </BorderPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="510.0" prefWidth="194.0" style="-fx-background-color: #d3e0e3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <AnchorPane layoutX="-1.0" prefHeight="323.0" prefWidth="44.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </AnchorPane>
-            <JFXButton fx:id="buttonHome" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="-4.0" layoutY="14.0" onAction="#buttonHomeClicked" prefHeight="47.0" prefWidth="194.0" text="Trang chủ">
-               <graphic>
-                  <FontAwesomeIcon iconName="HOME" size="1.5em" />
-               </graphic></JFXButton>
-            <JFXButton fx:id="buttonStudent" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="61.0" onAction="#buttonStudentClicked" prefHeight="47.0" prefWidth="194.0" text="Sinh viên">
-               <graphic>
-                  <FontAwesomeIcon iconName="USER" size="1.5em" />
-               </graphic>
-            </JFXButton>
-         </children>
-         <effect>
-            <DropShadow />
-         </effect>
-      </AnchorPane>
-   </children>
+				</BorderPane>
+			</children>
+		</AnchorPane>
+		<AnchorPane prefHeight="510.0" prefWidth="194.0" style="-fx-background-color: #d3e0e3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<children>
+				<AnchorPane layoutX="-1.0" prefHeight="323.0" prefWidth="44.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<effect>
+						<DropShadow />
+					</effect>
+				</AnchorPane>
+				<JFXButton fx:id="buttonHome" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutX="-4.0" layoutY="14.0" onAction="#buttonHomeClicked" prefHeight="47.0" prefWidth="196.0" text="Trang chủ">
+					<graphic>
+						<FontAwesomeIcon iconName="HOME" size="1.5em" />
+					</graphic>
+				</JFXButton>
+				<JFXButton fx:id="buttonStudent" alignment="BASELINE_LEFT" graphicTextGap="35.0" layoutY="61.0" onAction="#buttonStudentClicked" prefHeight="47.0" prefWidth="194.0" text="Sinh viên">
+					<graphic>
+						<FontAwesomeIcon iconName="USER" size="1.5em" />
+					</graphic>
+				</JFXButton>
+			</children>
+			<effect>
+				<DropShadow />
+			</effect>
+		</AnchorPane>
+	</children>
 </AnchorPane>

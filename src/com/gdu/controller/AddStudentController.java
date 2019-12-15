@@ -2,6 +2,7 @@ package com.gdu.controller;
 
 import com.gdu.entity.StudentRegistration;
 import com.gdu.model.Model;
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -9,7 +10,11 @@ import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Stop;
+import javafx.stage.Stage;
 
 public class AddStudentController {
 
@@ -97,6 +102,12 @@ public class AddStudentController {
 	JFXCheckBox checkboxBirthCertificate;
 
 	@FXML
+	private JFXButton btnSave;
+	
+	@FXML
+	private AnchorPane stageInformationOfStudent;
+	
+	@FXML
 	private void saveClicked() {
 		System.out.println(txtStudentCode.getText());
 		Model model = new Model();
@@ -107,7 +118,7 @@ public class AddStudentController {
 		student.setPlaceOfBirth(txtPlaceOfBirth.getText());
 		student.setIdOfStudent(txtIdOfStudent.getText());
 		student.setPhoneNumber(txtPhoneNumber.getText());
-	    student.setDateOfBirth(dateOfBirth.toString());
+	    student.setDateOfBirth(dateOfBirth.getValue().toString());
 		student.setDateApply(dateApply.toString());
 		student.setGender("Nam");
 		student.setAreaCode(cbCodeOfPlace.getValue());
@@ -139,7 +150,11 @@ public class AddStudentController {
 		student.setProvinceSchool(txtProvinceSchool.getText());
 		//Thông tin thêm
 		student.setAddressNow(txtAddressNow.getText());
-		student.setNotes(txtNotes.getText());
+		student.setNotes(txtNotes.getText());	
+		student.setStatus("Chờ duyệt");
 		model.insertStudents(student);
+		Model.studentsRestrationList.add(student);
+		Stage stage = (Stage) stageInformationOfStudent.getScene().getWindow();
+		stage.close();
 	}
 }

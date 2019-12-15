@@ -21,6 +21,8 @@ public class Model {
 	Gson g = new Gson();
 	FindIterable<Document> findIterable;
 	public static List<Student> studentList = new ArrayList<Student>();
+	public static List<StudentRegistration> studentsRestrationList = new ArrayList<StudentRegistration>();
+	
 	
 	public List<Student> getAllStudent()
 	{
@@ -36,6 +38,20 @@ public class Model {
 		return studentList;
 	}
 	
+	public List<StudentRegistration> getAllStudentRegistration()
+	{
+		findIterable = mongoDB.collectionStudentRegistration().find(new Document());
+		
+		for(Document doc: findIterable)
+		{
+			StudentRegistration s = g.fromJson(doc.toJson().toString(), StudentRegistration.class); 
+			//Scores sc =  s.getScore().get(0);
+			//System.out.println(sc.getLy_A2());
+			studentsRestrationList.add(s);
+		}		
+		return studentsRestrationList;
+	}
+	
 	public void insertStudents(Student student)
 	{
 		Document doc = new Document();
@@ -47,7 +63,7 @@ public class Model {
 	{
 		Document doc = new Document();
 		doc =  Document.parse(g.toJson(student));
-		mongoDB.collectionStudent().insertOne(doc);
+		mongoDB.collectionStudentRegistration().insertOne(doc);
 	}
 	
 	public void updateStudents(Student student)

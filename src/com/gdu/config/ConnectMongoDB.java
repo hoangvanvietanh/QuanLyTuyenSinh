@@ -32,6 +32,12 @@ public class ConnectMongoDB {
 		MongoCollection<Document> collection = database.getCollection(collection_name);
 		return collection;
 	}
+	
+	public MongoCollection<Document> collectionStudentRegistration ()
+	{
+		MongoCollection<Document> collection = database.getCollection("students_registration");
+		return collection;
+	}
 //	public MongoCollection<Document> collection (String colectionName)
 //	{
 //		MongoCollection<Document> collection = database.getCollection(colectionName);

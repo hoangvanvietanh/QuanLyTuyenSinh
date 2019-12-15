@@ -1,203 +1,39 @@
-package com.gdu.controller;
+package com.gdu.reports;
 
-import java.awt.color.CMMException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import javax.xml.stream.events.StartDocument;
-
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import com.gdu.entity.Status;
-import com.gdu.entity.Student;
-import com.gdu.entity.StudentRegistration;
 import com.gdu.entity.StudentRegistration;
 import com.gdu.model.Model;
-import com.jfoenix.controls.JFXButton;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
-import javafx.util.StringConverter;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.swing.JRViewer;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
 
-public class TestController implements Initializable {
+public class ExportFileExcel extends Application {
 
-	public List<StudentRegistration> listStudentRegistration = Model.studentsRestrationList;
-	
-	@FXML
-	private Pane paneHome, paneStudent, pane3;
-
-	@FXML
-	private JFXButton buttonHome, buttonStudent;
-
-	@FXML
-    private TableView<StudentRegistration> tbData;
-	@FXML
-    public TableColumn<String,String> stt;
-	@FXML
-    public TableColumn<StudentRegistration, String> status;
-    @FXML
-    public TableColumn<StudentRegistration, String> full_name;
-    @FXML
-    public TableColumn<StudentRegistration, String> date_of_birth;
-    @FXML
-    public TableColumn<StudentRegistration, String> place_of_birth;
-    @FXML
-    public TableColumn<StudentRegistration, String> math_scores_US;
-    @FXML
-    public TableColumn<StudentRegistration, String> physical_scores_US;
-    @FXML
-    public TableColumn<StudentRegistration, String> chemistry_scores_US;
-    @FXML
-    public TableColumn<StudentRegistration, String> literature_scores_US;
-    @FXML
-    public TableColumn<StudentRegistration, String> math_scores;
-    @FXML
-    public TableColumn<StudentRegistration, String> physical_scores;
-    @FXML
-    public TableColumn<StudentRegistration, String> chemistry_scores;
-    @FXML
-    public TableColumn<StudentRegistration, String> literature_scores;
-    @FXML
-    public AnchorPane stageHome;
-    
-	@FXML
-	public void buttonHomeClicked() {
-		paneHome.toFront();
-
-	}
-	
-	@FXML
-	public void buttonStudentClicked() {
-		paneStudent.toFront();
-		
-
-	}
-	@FXML
-	public void reportClicked() throws IOException
-	{
-		Stage stage = (Stage) stageHome.getScene().getWindow();
-		DirectoryChooser directoryChooser = new DirectoryChooser();
-		directoryChooser.setTitle("Chọn đường dẫn lưu file");
-		File selectedDirectory = directoryChooser.showDialog(stage);
-
-		if(selectedDirectory == null){
-		     //No Directory selected
-		}else{
-			exportFileExcel(listStudentRegistration,selectedDirectory.getAbsolutePath());
-		}
-		
-	}
-	
-	@FXML
-	public void btnRegistrationClicked() {
-		try {
-		    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
-		    Parent root1 = (Parent) fxmlLoader.load();
-		    Stage stage = new Stage();
-		   // stage.initModality(Modality.APPLICATION_MODAL);
-		   // stage.initStyle(StageStyle.UNDECORATED);
-		    stage.setTitle("Đăng ký");
-		    stage.setScene(new Scene(root1));  
-		    stage.show();
-		    stage.setOnHidden(new EventHandler<WindowEvent>() {
-				@Override
-				public void handle(WindowEvent event) {
-					System.out.println("Đã load data");
-					loadData();
-				}
-			});
-		}catch (Exception e) {
-			// TODO: handle exception
-		}
-
+	public static void main(String[] args) {
+		launch(args);
 	}
 
 	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		Model models = new Model();
-		models.getAllStudentRegistration();
-		loadData();
-
-	}
-	@FXML
-    private void btnSelectedRow()
-    {
-    	StudentRegistration sv = tbData.getSelectionModel().getSelectedItem();
-    	System.out.println(sv.getFullName());
-    }
-	public void loadData()
-	{   
-		stt.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
-		stt.setSortable(false);
-		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
-		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
-		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
-		math_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresOfGraduationTest"));
-		physical_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresOfGraduationTest"));
-		chemistry_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresOfGraduationTest"));
-		literature_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresOfGraduationTest"));
-		math_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresInSchoolReport"));
-		physical_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresInSchoolReport"));
-		chemistry_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresInSchoolReport"));
-		literature_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresInSchoolReport"));
-		status.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
-		ObservableList<StudentRegistration> StudentRegistration = FXCollections.observableArrayList(listStudentRegistration);
-		tbData.setItems(StudentRegistration);
-		
-		ObservableList<String> items = FXCollections.observableArrayList();
-		ComboBox<String> cb = new ComboBox<String>();
-		cb.getItems().add("1");
-		cb.getItems().add("2");
-	}
-	
-	public void exportFileExcel(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException
-	{
-		List<StudentRegistration> listStudentRegistration = listStudent;
+	public void start(Stage primaryStage) throws IOException {
+		Model model = new Model();
+		model.getAllStudentRegistration();
+		List<StudentRegistration> listStudentRegistration = Model.studentsRestrationList;
 //        TableView<Person> table = new TableView<Person>();
 //
 //        
@@ -330,8 +166,11 @@ public class TestController implements Initializable {
 			}
 		}
 
-		FileOutputStream fileOut = new FileOutputStream(pathSaveFile+"/danh_sach_hoc_sinh.xls");
+		FileOutputStream fileOut = new FileOutputStream("danh_sach_hoc_sinh.xls");
 		workbook.write(fileOut);
 		fileOut.close();
+		System.out.println("done");
+		Platform.exit();
+
 	}
 }
