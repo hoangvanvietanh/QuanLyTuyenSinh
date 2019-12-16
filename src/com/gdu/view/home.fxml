@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import de.jensd.fx.glyphs.testapps.GlyphsBrowser?>
 <?import javafx.scene.chart.CategoryAxis?>
@@ -22,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="stageHome" prefHeight="510.0" prefWidth="1299.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.TestController">
+<AnchorPane fx:id="stageHome" prefHeight="510.0" prefWidth="1299.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.HomeController">
 	<children>
 		<AnchorPane layoutX="193.0" prefHeight="510.0" prefWidth="771.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
 			<effect>
@@ -141,6 +142,43 @@
 						</HBox>
 					</children>
 				</Pane>
+            <BorderPane fx:id="paneTableView2" layoutX="16.0" layoutY="80.0" prefHeight="440.0" prefWidth="1089.0">
+               <top>
+                  <Pane prefHeight="0.0" prefWidth="1089.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+               </top>
+               <left>
+                  <Pane prefHeight="314.0" prefWidth="10.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+               </left>
+               <right>
+                  <Pane prefHeight="263.0" prefWidth="8.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+               </right>
+               <bottom>
+                  <Pane prefHeight="9.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
+               </bottom>
+               <center>
+                  <ScrollPane prefHeight="429.0" prefWidth="1016.0" BorderPane.alignment="CENTER">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="427.0" prefWidth="1070.0">
+                           <children>
+                              <TableView fx:id="tbDataBasic" layoutX="99.0" layoutY="23.0" onMouseClicked="#btnSelectedRow2" prefHeight="398.0" prefWidth="1051.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="23.0">
+                                 <columns>
+                                    <TableColumn fx:id="stt1" prefWidth="48.0" text="STT" />
+                                    <TableColumn fx:id="full_name_tbv2" prefWidth="195.0" text="Họ tên" />
+                                    <TableColumn fx:id="date_of_birth_tbv2" prefWidth="95.0" text="Ngày sinh" />
+                                    <TableColumn fx:id="place_of_birth_tbv2" prefWidth="102.0" text="Nơi sinh" />
+                                    <TableColumn fx:id="gender_tbv2" prefWidth="73.0" text="Giới tính" />
+                                    <TableColumn fx:id="cmnd_tbv2" prefWidth="114.0" text="Số CMND" />
+                                    <TableColumn fx:id="email_tbv2" prefWidth="97.0" text="Email" />
+                                    <TableColumn fx:id="phone_number_tbv2" prefWidth="97.0" text="SĐT" />
+                                    <TableColumn fx:id="status_tbv2" prefWidth="97.0" text="Trạng thái" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
+               </center>
+            </BorderPane>
 				<BorderPane fx:id="paneStudent" layoutX="16.0" prefHeight="510.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<top>
 						<Pane prefHeight="80.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
@@ -166,6 +204,7 @@
 										<FontAwesomeIcon iconName="FILE" size="1.5em" />
 									</graphic>
 								</JFXButton>
+                        <JFXComboBox fx:id="cbViewTable" layoutX="561.0" layoutY="46.0" onAction="#cbViewTableSelected" prefHeight="26.0" prefWidth="228.0" promptText="Xem thông tin điểm" />
 							</children>
 						</Pane>
 					</top>
@@ -233,6 +272,21 @@
 						<FontAwesomeIcon iconName="USER" size="1.5em" />
 					</graphic>
 				</JFXButton>
+            <JFXButton fx:id="btnShowStudent" alignment="BASELINE_LEFT" graphicTextGap="25.0" layoutY="283.0" prefHeight="47.0" prefWidth="194.0" text="Sinh viên" visible="false">
+               <graphic>
+                  <FontAwesomeIcon iconName="USER" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnMatriculationReport" alignment="BASELINE_LEFT" graphicTextGap="25.0" layoutY="377.0" onAction="#btnMatriculationReport" prefHeight="47.0" prefWidth="194.0" text="Báo trúng tuyển" visible="false">
+               <graphic>
+                  <FontAwesomeIcon iconName="USER" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btnUpdateInfo" alignment="BASELINE_LEFT" graphicTextGap="25.0" layoutY="330.0" onAction="#btnUpdateInfo" prefHeight="47.0" prefWidth="194.0" text="Cập nhật thông tin" visible="false">
+               <graphic>
+                  <FontAwesomeIcon iconName="USER" size="1.5em" />
+               </graphic>
+            </JFXButton>
 			</children>
 			<effect>
 				<DropShadow />

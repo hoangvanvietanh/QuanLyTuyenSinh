@@ -1,14 +1,18 @@
 package com.gdu.reports;
 
+import java.io.File;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
  
 import javax.swing.JFrame;
 
+import com.gdu.ultils.GetCurrentPath;
+
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
@@ -29,7 +33,7 @@ public class PrintReport extends JFrame {
     
     public void showReport(String name, String dateOfBirth, String placeOfBirth, String cmnd) throws JRException, ClassNotFoundException, SQLException {
  
-        String reportSrcFile = "/home/hoangvanvietanh/Documents/QuanLyTuyenSinh/src/com/gdu/reports/formTrungTuyen.jrxml";
+        String reportSrcFile = GetCurrentPath.path()+ "src/com/gdu/reports/formTrungTuyen.jrxml";
  
         // First, compile jrxml file.
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
@@ -53,7 +57,13 @@ public class PrintReport extends JFrame {
         this.setSize(700, 500);
         this.setVisible(true);
         System.out.print("Done!");
- 
+        String realPath = GetCurrentPath.path() + "src/com/gdu/documents/";
+
+        File file = new File(realPath);
+        file.mkdirs();
+
+        JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath() +"/reportTrungTuyen.pdf");
+        System.out.println(file.getAbsolutePath() +"ok");
     }
  
 }

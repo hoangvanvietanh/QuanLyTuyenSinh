@@ -17,7 +17,7 @@ public class StudentRegistration {
 	
     private String dateOfBirth;
 	
-	private String dateApply;
+	private String email;
 	
 	private String gender;
 	
@@ -140,12 +140,12 @@ public class StudentRegistration {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public String getDateApply() {
-		return dateApply;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setDateApply(String dateApply) {
-		this.dateApply = dateApply;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getGender() {

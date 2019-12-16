@@ -66,6 +66,14 @@ public class Model {
 		mongoDB.collectionStudentRegistration().insertOne(doc);
 	}
 	
+	public void updateStudents(StudentRegistration student)
+	{
+		Document doc = new Document();
+		doc =  Document.parse(g.toJson(student));
+		Bson filter = Filters.eq("studentCode", student.getStudentCode());
+		mongoDB.collectionStudentRegistration().replaceOne(filter, doc);
+	}
+	
 	public void updateStudents(Student student)
 	{
 		Document doc = new Document();
