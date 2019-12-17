@@ -1,6 +1,8 @@
 package com.gdu.controller;
 
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 import com.gdu.entity.Student;
 import com.gdu.entity.StudentRegistration;
@@ -14,8 +16,11 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Stop;
 import javafx.stage.Stage;
@@ -83,6 +88,7 @@ public class AddStudentController {
 	JFXTextField email;
 	@FXML
 	JFXComboBox<String> cbCodeOfPlace;
+
 	@FXML
 	JFXComboBox<String> cbMajor;
 	@FXML
@@ -109,7 +115,20 @@ public class AddStudentController {
 	private JFXButton btnSave;
 	@FXML
 	private AnchorPane stageInformationOfStudent;
+	
+	ObservableList<String> list1 = FXCollections.observableArrayList("KV1","KV2","KV3");
+	ObservableList<String> list2 = FXCollections.
+			observableArrayList("Kỹ Thuật Phần Mềm","Mạng máy tính và truyền thông dữ liệu","Quản trị kinh doanh","Tài chính ngân hàng","Kế toán","Ngôn ngữ Anh");
+	@FXML
+	private void initialize() {
+		cbCodeOfPlace.setItems(list1);
+		cbCodeOfPlace.setValue("KV1");
+		
+		cbMajor.setItems(list2);
+		cbMajor.setValue("Kỹ Thuật Phần Mềm");
+	}
 
+	
 	public void setData(StudentRegistration student) {
 		studentUpdate = student;
 		txtStudentCode.setText(student.getStudentCode());
@@ -142,8 +161,9 @@ public class AddStudentController {
 		email.setText(student.getEmail());
 		modeUpdateOrNew = "update";
 		LocalDate dateOfBirthChange = LocalDate.parse(student.getDateOfBirth());
-		dateOfBirth.setValue(dateOfBirthChange);
+		dateOfBirth.setValue(dateOfBirthChange);		
 	}
+
 
 	@FXML
 	private void saveClicked() {
