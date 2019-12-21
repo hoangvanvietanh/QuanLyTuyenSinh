@@ -66,7 +66,7 @@ public class GMail {
 
     private static Message prepareMessage(Session session, String myAccountEmail, String recepient, StudentRegistration student) {
         try {
-            Message message = new MimeMessage(session);
+        	MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(myAccountEmail));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recepient));
             message.setSubject("My First Email from Java App");
@@ -74,13 +74,13 @@ public class GMail {
             //message.setContent(htmlCode, "text/html");
             
          // Create the message part
-	         BodyPart messageBodyPart = new MimeBodyPart();
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
 
 	         // Now set the actual message
-	         messageBodyPart.setContent(htmlCode, "text/html");
+	         messageBodyPart.setContent(htmlCode,"text/html; charset=utf-8");
 
 	         // Create a multipar message
-	         Multipart multipart = new MimeMultipart();
+	         MimeMultipart multipart = new MimeMultipart();
 
 	         // Set text message part
 	         multipart.addBodyPart(messageBodyPart);
@@ -94,7 +94,7 @@ public class GMail {
 	         multipart.addBodyPart(messageBodyPart);
 
 	         // Send the complete message parts
-	         message.setContent(multipart);
+	         message.setContent(multipart, "UTF-8");
             return message;
         } catch (Exception ex) {
             //Logger.getLogger(JavaMailUtil.class.getName()).log(Level.SEVERE, null, ex);

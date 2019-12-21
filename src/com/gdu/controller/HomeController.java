@@ -28,6 +28,7 @@ import com.gdu.entity.StudentRegistration;
 import com.gdu.entity.StudentRegistration;
 import com.gdu.model.Model;
 import com.gdu.reports.PrintReport;
+import com.gdu.ultils.ChangeVietNamText;
 import com.gdu.ultils.GMail;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -756,7 +757,10 @@ public class HomeController implements Initializable {
 	                ObservableValue<?> observable = col.getCellObservableValue(o);
 	                if (observable != null) {
 	                    Object value = observable.getValue();
-	                    if (value != null && value.toString().toLowerCase().equals(filterText)) {
+	                    if (value != null && value.toString().toLowerCase().indexOf(filterText) >= 0) {
+	                        return true;
+	                    }
+	                    if (value != null && ChangeVietNamText.removeAccent(value.toString().toLowerCase()).indexOf(filterText) >= 0) {
 	                        return true;
 	                    }
 	                }

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="file" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9fdc5cfb-8cd7-4992-9140-8485b84bce67">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="name" class="java.lang.String"/>
+	<field name="placeOfBirth" class="java.lang.String"/>
+	<field name="dateOfBirth" class="java.lang.String"/>
+	<field name="cmnd" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="48" splitType="Stretch">
+			<staticText>
+				<reportElement x="207" y="0" width="140" height="12" uuid="5e30790e-26ca-421e-9e83-777b2cf5bd0a"/>
+				<text><![CDATA[BỘ GIÁO DỤC VÀ ĐÀO TẠO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="202" y="20" width="150" height="20" uuid="e7e29b70-78d6-4f1b-b875-b3af4f9caa19"/>
+				<text><![CDATA[TRƯỜNG ĐẠI HỌC GIA ĐỊNH]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="215" y="10" width="136" height="19" uuid="74d8356a-05d4-4366-bdcd-4686af62b5b4"/>
+				<text><![CDATA[GIẤY BÁO TRÚNG TUYỂN]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="121" y="30" width="324" height="15" uuid="2f7a72b7-3b18-4f9b-83c6-02e8d6c5dd18"/>
+				<text><![CDATA[Hội đồng Tuyển sinh Trường Đại học Gia Định thông báo đến :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="7" width="240" height="20" uuid="4710da8d-afa9-4f7d-8e5c-e2b6ee54d9bb"/>
+				<text><![CDATA[TRÌNH ĐỘ ĐẠI HỌC, HỆ CHÍNH QUY NĂM 2019]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="148" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="90" width="80" height="20" uuid="c18784fc-95a9-453f-b91f-23bcf16a51f4"/>
+				<text><![CDATA[Điểm các môn: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="60" width="100" height="20" uuid="db173214-9651-4f10-b7a3-fda2b0df7780"/>
+				<text><![CDATA[Loại xét tuyển: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="60" width="100" height="20" uuid="c8432182-5a1e-4a1d-9269-31429c4f2b57"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="2" width="65" height="20" uuid="e50011c5-39e9-457e-be40-47fefd55af0f"/>
+				<text><![CDATA[Anh (chị): ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="30" width="100" height="20" uuid="540dca32-65c1-4278-aca2-cb3ed007f888"/>
+				<text><![CDATA[Số CMND: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="2" width="97" height="20" uuid="6c8cae8c-086a-49dc-8e11-d53a95ea5769"/>
+				<text><![CDATA[Ngày sinh :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="118" width="80" height="20" uuid="2dbede22-2ed1-4113-8568-860b8b91b188"/>
+				<text><![CDATA[Tổng điểm:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="65" height="20" uuid="5fcbf7b8-e7c9-4907-88bb-79b71c1e8798"/>
+				<text><![CDATA[Nơi sinh: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="60" width="121" height="20" uuid="ffc32d7a-ca1c-4615-b304-8609c8fc56d1"/>
+				<text><![CDATA[Tổ hợp môn xét tuyển: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="380" y="60" width="100" height="20" uuid="3d55cc6a-44c5-4c55-9252-753f2f1c5dd9"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="90" width="100" height="20" uuid="c59e0b89-78d3-4072-8366-43f50d3effec"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="118" width="100" height="20" uuid="a95b92b0-8e91-43fd-be75-8a26b3331e81"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="2" width="100" height="20" uuid="534d6334-9b4e-4fe9-8f98-c747e6754474">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8b65b313-23b5-4b42-a7e5-6793a4b2885d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="30" width="100" height="20" uuid="4fdc35c0-b749-489d-a4a6-f48333f96901">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="17eda121-d094-43ff-bb7f-7bb3523f952e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{placeOfBirth}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="2" width="100" height="20" uuid="786d9931-56e7-47b8-818d-e1279f8cf6df">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="80a74278-c14a-4226-be8d-2dbf93732c01"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{dateOfBirth}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="30" width="100" height="21" uuid="9bb0a3f5-8972-4f4d-b75f-ba01cdbf073a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="825a4055-4e5c-4ecb-84e1-6a9af44fda2e"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{cmnd}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="7" width="180" height="30" uuid="d65df296-dded-4960-a554-b2a588adfab9"/>
+				<text><![CDATA[Anh chị đã trúng tuyển vào ngành]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="380" y="7" width="189" height="30" uuid="df7f9ffd-36a4-4bc7-afef-b4e35bc91760"/>
+				<text><![CDATA[trình độ Đại học]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="188" y="12" width="190" height="20" uuid="6a581b4b-d1b1-4173-ad9c-0c2df48e15cd"/>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

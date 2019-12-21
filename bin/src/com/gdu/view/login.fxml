@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="324.0" prefWidth="652.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="com.gdu.controller.LoginController">
+  <!-- TODO Add Nodes -->
+  <children>
+    <HBox layoutX="0.0" layoutY="0.0" prefHeight="324.0" prefWidth="652.0">
+      <children>
+        <Pane prefHeight="324.0" prefWidth="326.0">
+          <children>
+            <ImageView fitHeight="310.0" fitWidth="310.0" layoutX="8.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" smooth="true">
+              <image>
+                <Image url="@../../../../images/logo-dai-hoc-gia-dinh.png" />
+              </image>
+            </ImageView>
+          </children>
+        </Pane>
+        <Pane prefHeight="324.0" prefWidth="326.0">
+          <children>
+            <Label id="laTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="72.0" layoutY="19.0" prefHeight="53.28125" prefWidth="184.0" text="Đăng nhập">
+              <font>
+                <Font size="30.0" />
+              </font>
+            </Label>
+            <TextField id="code_login" fx:id="txtCodeLogin" layoutX="44.0" layoutY="110.0" prefHeight="39.1328125" prefWidth="239.0" promptText="Nhập mã đăng nhập" />
+            <Button id="btnLogin" layoutX="108.0" layoutY="244.0" mnemonicParsing="false" onAction="#btnDangNhapclick" prefHeight="39.1328125" prefWidth="110.0" text="Đăng nhập" textAlignment="CENTER" />
+            <PasswordField fx:id="txtPassword" layoutX="44.0" layoutY="172.0" prefHeight="39.1328125" prefWidth="239.0" promptText="Nhập mật khẩu" />
+          </children>
+        </Pane>
+      </children>
+    </HBox>
+  </children>
+</AnchorPane>

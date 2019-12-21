@@ -61,8 +61,8 @@ public class PrintReport extends JFrame {
 
         File file = new File(realPath);
         file.mkdirs();
-
         JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath() +"/reportTrungTuyen.pdf");
+        JasperExportManager.exportReportToHtmlFile(print, file.getAbsolutePath() +"/reportTrungTuyen.html");
         System.out.println(file.getAbsolutePath() +"ok");
     }
  

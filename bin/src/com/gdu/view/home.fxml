@@ -30,6 +30,11 @@
 				<DropShadow />
 			</effect>
 			<children>
+				<Pane fx:id="pane3" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<GlyphsBrowser layoutY="8.0" prefHeight="374.0" prefWidth="563.0" />
+					</children>
+				</Pane>
             <BorderPane fx:id="paneTableView2" layoutX="16.0" layoutY="80.0" prefHeight="440.0" prefWidth="1089.0">
                <top>
                   <Pane prefHeight="0.0" prefWidth="1089.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
@@ -76,18 +81,23 @@
 										<Font size="20.0" />
 									</font>
 								</Label>
-								<JFXButton fx:id="btnRegistration" alignment="BASELINE_LEFT" layoutX="232.0" layoutY="44.0" onAction="#btnRegistrationClicked" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ede8da;" text="Đăng ký">
+								<JFXButton layoutX="234.0" layoutY="46.0" onAction="#searchID" style="-fx-background-color: #ede8da;" text="Tìm kiếm">
+									<graphic>
+										<FontAwesomeIcon iconName="SEARCH" />
+									</graphic>
+								</JFXButton>
+								<JFXButton fx:id="btnRegistration" alignment="BASELINE_LEFT" layoutX="336.0" layoutY="44.0" onAction="#btnRegistrationClicked" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ede8da;" text="Đăng ký">
 									<graphic>
 										<FontAwesomeIcon iconName="PLUS" size="1.5em" />
 									</graphic>
 								</JFXButton>
-								<JFXButton alignment="BASELINE_LEFT" layoutX="346.0" layoutY="44.0" onAction="#reportClicked" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #ede8da;" text="Xuất file Excel">
+								<JFXButton alignment="BASELINE_LEFT" layoutX="446.0" layoutY="44.0" onAction="#reportClicked" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #ede8da;" text="Xuất file">
 									<graphic>
 										<FontAwesomeIcon iconName="FILE" size="1.5em" />
 									</graphic>
 								</JFXButton>
-                        <JFXComboBox fx:id="cbViewTable" layoutX="503.0" layoutY="46.0" onAction="#cbViewTableSelected" prefHeight="26.0" prefWidth="228.0" promptText="Xem thông tin điểm" />
-                        <JFXTextField fx:id="txtSearch" layoutX="14.0" layoutY="46.0" onKeyReleased="#searchPress" prefHeight="26.0" prefWidth="212.0" promptText="Tìm kiếm" />
+                        <JFXComboBox fx:id="cbViewTable" layoutX="561.0" layoutY="46.0" onAction="#cbViewTableSelected" prefHeight="26.0" prefWidth="228.0" promptText="Xem thông tin điểm" />
+                        <JFXTextField fx:id="txtSearch" layoutX="14.0" layoutY="46.0" onKeyReleased="#searchPress" prefHeight="26.0" prefWidth="212.0" />
 							</children>
 						</Pane>
 					</top>
@@ -136,11 +146,6 @@
                   </ScrollPane>
                </center>
 				</BorderPane>
-				<Pane fx:id="pane3" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-					<children>
-						<GlyphsBrowser layoutY="8.0" prefHeight="374.0" prefWidth="563.0" />
-					</children>
-				</Pane>
 				<Pane fx:id="paneHome" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<children>
 						<HBox layoutY="52.0" prefHeight="100.0" prefWidth="756.0">
