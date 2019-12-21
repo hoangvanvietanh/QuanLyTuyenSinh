@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,11 +30,16 @@ import com.gdu.model.Model;
 import com.gdu.reports.PrintReport;
 import com.gdu.ultils.GMail;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -43,10 +49,15 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.ComboBoxTableCell;
@@ -83,68 +94,126 @@ public class HomeController implements Initializable {
 	@FXML
     private TableView<StudentRegistration> tbDataBasic;
 	@FXML
-    public TableColumn<String,String> stt;
+	private TableColumn<String,String> stt;
 	@FXML
-    public TableColumn<String,String> stt1;
+	private TableColumn<String,String> stt1;
 	@FXML
-    public TableColumn<StudentRegistration, String> status;
+	private TableColumn<StudentRegistration, String> status;
     @FXML
-    public TableColumn<StudentRegistration, String> full_name;
+    private TableColumn<StudentRegistration, String> full_name;
     @FXML
-    public TableColumn<StudentRegistration, String> date_of_birth;
+    private TableColumn<StudentRegistration, String> date_of_birth;
     @FXML
-    public TableColumn<StudentRegistration, String> place_of_birth;
+    private TableColumn<StudentRegistration, String> place_of_birth;
     @FXML
-    public TableColumn<StudentRegistration, String> full_name_tbv2;
+    private TableColumn<StudentRegistration, String> full_name_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> date_of_birth_tbv2;
+    private TableColumn<StudentRegistration, String> date_of_birth_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> place_of_birth_tbv2;
+    private TableColumn<StudentRegistration, String> place_of_birth_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> gender_tbv2;
+    private TableColumn<StudentRegistration, String> gender_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> cmnd_tbv2;
+    private TableColumn<StudentRegistration, String> cmnd_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> email_tbv2;
+    private TableColumn<StudentRegistration, String> email_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> phone_number_tbv2;
+    private TableColumn<StudentRegistration, String> phone_number_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> status_tbv2;
+    private TableColumn<StudentRegistration, String> status_tbv2;
     @FXML
-    public TableColumn<StudentRegistration, String> math_scores_US;
+    private TableColumn<StudentRegistration, String> math_scores_US;
     @FXML
-    public TableColumn<StudentRegistration, String> physical_scores_US;
+    private TableColumn<StudentRegistration, String> physical_scores_US;
     @FXML
-    public TableColumn<StudentRegistration, String> chemistry_scores_US;
+    private TableColumn<StudentRegistration, String> chemistry_scores_US;
     @FXML
-    public TableColumn<StudentRegistration, String> literature_scores_US;
+    private TableColumn<StudentRegistration, String> literature_scores_US;
     @FXML
-    public TableColumn<StudentRegistration, String> math_scores;
+    private TableColumn<StudentRegistration, String> math_scores;
     @FXML
-    public TableColumn<StudentRegistration, String> physical_scores;
+    private TableColumn<StudentRegistration, String> physical_scores;
     @FXML
-    public TableColumn<StudentRegistration, String> chemistry_scores;
+    private TableColumn<StudentRegistration, String> chemistry_scores;
     @FXML
-    public TableColumn<StudentRegistration, String> literature_scores;
+    private TableColumn<StudentRegistration, String> literature_scores;
     @FXML
-    public AnchorPane stageHome;
+    private AnchorPane stageHome;
     @FXML
-    public ComboBox<String> cbViewTable;
+    private ComboBox<String> cbViewTable;
     
-	@FXML
-	public void buttonHomeClicked() {
-		paneHome.toFront();
+    @FXML
+    private CategoryAxis categoryAxis;
 
+    @FXML
+    private NumberAxis numberAxis;
+    
+    @FXML
+    private BarChart barchart;
+    
+    @FXML
+    private Label labelHocSinhDangHoc;
+
+    @FXML
+    private Label labelThiSinhTrungTuyen;
+
+    @FXML
+    private Label labelThiSinhChoDuyet;
+    
+    @FXML
+    private AnchorPane anchorPane;
+    
+    @FXML
+    public JFXTextField txtSearch;
+    
+    private int thiSinhChoDuyet = 0;
+    
+    private int thiSinhTrungTuyen = 0;
+    
+    private int sinhVienDangHoc = 0;
+    
+    private VBox vBox;
+	@FXML
+	private void buttonHomeClicked() {
+		paneHome.toFront();
+		btnShowStudent.setVisible(false);
+		btnUpdateInfo.setVisible(false);
+	    btnMatriculationReport.setVisible(false);
 	}
 	
 	@FXML
-	public void buttonStudentClicked() {
+	private void buttonStudentClicked() {
 		paneStudent.toFront();
-		
-
 	}
+	
 	@FXML
-	public void reportClicked() throws IOException
+	private void searchID()
+	{
+		List<StudentRegistration> studentRegistrations = new ArrayList<StudentRegistration>();
+		Model.studentsRestrationList.forEach((x)->{
+			if(x.getFullName().equals(txtSearch.getText()))
+			{
+				studentRegistrations.add(x);
+			}
+		});
+		if(txtSearch.getText().equals("1"))
+		{
+			searchTable(Model.studentsRestrationList);
+		}
+		searchTable(studentRegistrations);
+	}
+	
+	@FXML
+	private void searchPress()
+	{
+		System.out.println(txtSearch.getText());
+		ObservableList<StudentRegistration> StudentRegistration = FXCollections.observableArrayList(Model.studentsRestrationList);
+		addTextFilter(StudentRegistration,txtSearch,tbData);
+		addTextFilter(StudentRegistration,txtSearch,tbDataBasic);
+	}
+	
+	@FXML
+	private void reportClicked() throws IOException
 	{
 		Stage stage = (Stage) stageHome.getScene().getWindow();
 		DirectoryChooser directoryChooser = new DirectoryChooser();
@@ -168,7 +237,7 @@ public class HomeController implements Initializable {
 	}
 	
 	@FXML
-	public void btnRegistrationClicked() {
+	private void btnRegistrationClicked() {
 		try {
 		    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
 		    Parent root1 = (Parent) fxmlLoader.load();
@@ -183,6 +252,7 @@ public class HomeController implements Initializable {
 				public void handle(WindowEvent event) {
 					System.out.println("Đã load data");
 					loadData();
+					loadHistory();
 				}
 			});
 		}catch (Exception e) {
@@ -191,20 +261,65 @@ public class HomeController implements Initializable {
 
 	}
 
+	public void loadHistory()
+	{
+		vBox = new VBox();
+		anchorPane.getChildren().clear();
+		anchorPane.getChildren().add(vBox);
+		
+		for(int i = Model.historyList.size()-1;i>0;i--)
+		{
+			Label label = new Label(Model.historyList.get(i).getDate() + " : " + Model.historyList.get(i).getContent());
+			vBox.getChildren().add(label);
+		}
+		
+//		Model.historyList.forEach((x)->{
+//			Label label = new Label(x.getDate() +" : " +x.getContent());
+//			vBox.getChildren().add(label);
+//		});
+	}
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		Model models = new Model();
-		models.getAllStudentRegistration();
+		numberAxis.setLabel("Số học sinh");
+		categoryAxis.setLabel("Loại học sinh");
+		loadHistory();
+		
+		Model.studentsRestrationList.forEach((x)->{
+			if(x.getStatus().equals("Chờ duyệt"))
+			{
+				thiSinhChoDuyet++;
+			}
+			else
+			{
+				thiSinhTrungTuyen++;
+			}
+		});
+
+		sinhVienDangHoc = Model.studentList.size();
+		XYChart.Series data = new XYChart.Series();
+		data.setName("Sinh viên");
+		data.getData().add(new XYChart.Data("Học sinh đang học", sinhVienDangHoc));
+		data.getData().add(new XYChart.Data("Thí sinh trúng tuyển", thiSinhTrungTuyen));
+		data.getData().add(new XYChart.Data("Thí sinh chờ duyệt", thiSinhChoDuyet));
+		barchart.getData().add(data);
+		
+		labelHocSinhDangHoc.setText(String.valueOf(sinhVienDangHoc));
+		labelThiSinhTrungTuyen.setText(String.valueOf(thiSinhTrungTuyen));
+		labelThiSinhChoDuyet.setText(String.valueOf(thiSinhChoDuyet));
+		
 		loadData();
 		ObservableList<String> itemsCBView = FXCollections.observableArrayList();
 		itemsCBView.add("Xem thông tin cơ bản");
 		itemsCBView.add("Xem thông tin điểm");
 		cbViewTable.setItems(itemsCBView);
 		cbViewTable.getSelectionModel().select("Xem thông tin điểm");
+		
+		
 	}
 	@FXML
-	public void btnUpdateInfo()
+	private void btnUpdateInfo()
 	{
 		try {
 		    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
@@ -222,6 +337,7 @@ public class HomeController implements Initializable {
 				public void handle(WindowEvent event) {
 					System.out.println("Đã load data");
 					loadData();
+					loadHistory();
 				}
 			});
 		    stage.setOnShown(new EventHandler<WindowEvent>() {
@@ -256,7 +372,7 @@ public class HomeController implements Initializable {
     	
     }
 	
-	public void controlButtonOfStudent(StudentRegistration student)
+	private void controlButtonOfStudent(StudentRegistration student)
 	{
 		btnShowStudent.setVisible(true);
     	btnShowStudent.setText(student.getFullName());
@@ -281,7 +397,7 @@ public class HomeController implements Initializable {
     }
 	
 	@FXML
-	public void btnMatriculationReport()
+	private void btnMatriculationReport()
 	{
 		PrintReport printReport = new PrintReport();
     	try {
@@ -297,7 +413,6 @@ public class HomeController implements Initializable {
 	        		if(students.getStudentCode().equals(selectedStudent.getStudentCode()))
 	        		{
 	        			index = Model.studentsRestrationList.indexOf(students);
-	        			
 	        		}
 	        	}
 	        	if(index != -1)
@@ -322,7 +437,7 @@ public class HomeController implements Initializable {
 		}
 	}
 	
-	public void loadData()
+	private void loadData()
 	{   
 		stt.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
 		stt.setSortable(false);
@@ -357,7 +472,43 @@ public class HomeController implements Initializable {
 		tbDataBasic.refresh();
 	}
 	
-	public void exportFileExcel(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException
+	private void searchTable(List<StudentRegistration> studentList)
+	{   
+		stt.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
+		stt.setSortable(false);
+		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
+		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
+		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
+		math_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresOfGraduationTest"));
+		physical_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresOfGraduationTest"));
+		chemistry_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresOfGraduationTest"));
+		literature_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresOfGraduationTest"));
+		math_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresInSchoolReport"));
+		physical_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresInSchoolReport"));
+		chemistry_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresInSchoolReport"));
+		literature_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresInSchoolReport"));
+		status.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
+		
+		stt1.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
+		stt1.setSortable(false);
+		full_name_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
+		date_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
+		place_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
+		gender_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("gender"));
+		cmnd_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("idOfStudent"));
+		email_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("email"));
+		phone_number_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("phoneNumber"));
+		status_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("status"));
+		
+		ObservableList<StudentRegistration> StudentRegistration = FXCollections.observableArrayList(studentList);
+		tbData.setItems(StudentRegistration);
+		tbDataBasic.setItems(StudentRegistration);
+		tbData.refresh();
+		tbDataBasic.refresh();
+	}
+	
+	
+	private void exportFileExcel(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException
 	{
 		List<StudentRegistration> listStudentRegistration = listStudent;
 //        TableView<Person> table = new TableView<Person>();
@@ -503,7 +654,7 @@ public class HomeController implements Initializable {
 		alert.showAndWait();
 	}
 	
-	public void exportFileExcelBasicInfo(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException
+	private void exportFileExcelBasicInfo(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException
 	{
 		List<StudentRegistration> listStudentRegistration = listStudent;
 		TableView<StudentRegistration> tbData = new TableView<StudentRegistration>();
@@ -584,5 +735,38 @@ public class HomeController implements Initializable {
 		fileOut.close();
 		
 		
+	}
+	
+	public <T> void addTextFilter(ObservableList<T> allData,
+	        JFXTextField filterField, TableView<T> table) {
+
+	    final List<TableColumn<T, ?>> columns = table.getColumns();
+
+	    FilteredList<T> filteredData = new FilteredList<>(allData);
+	    filteredData.predicateProperty().bind(Bindings.createObjectBinding(() -> {
+	        String text = filterField.getText();
+
+	        if (text == null || text.isEmpty()) {
+	            return null;
+	        }
+	        final String filterText = text.toLowerCase();
+
+	        return o -> {
+	            for (TableColumn<T, ?> col : columns) {
+	                ObservableValue<?> observable = col.getCellObservableValue(o);
+	                if (observable != null) {
+	                    Object value = observable.getValue();
+	                    if (value != null && value.toString().toLowerCase().equals(filterText)) {
+	                        return true;
+	                    }
+	                }
+	            }
+	            return false;
+	        };
+	    }, filterField.textProperty()));
+
+	    SortedList<T> sortedData = new SortedList<>(filteredData);
+	    sortedData.comparatorProperty().bind(table.comparatorProperty());
+	    table.setItems(sortedData);
 	}
 }

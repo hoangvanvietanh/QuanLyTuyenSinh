@@ -33,6 +33,12 @@ public class ConnectMongoDB {
 		return collection;
 	}
 	
+	public MongoCollection<Document> collectionHistory ()
+	{
+		MongoCollection<Document> collection = database.getCollection("history");
+		return collection;
+	}
+	
 	public MongoCollection<Document> collectionStudentRegistration ()
 	{
 		MongoCollection<Document> collection = database.getCollection("students_registration");

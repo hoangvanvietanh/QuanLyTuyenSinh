@@ -2,16 +2,16 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import de.jensd.fx.glyphs.testapps.GlyphsBrowser?>
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
@@ -33,113 +33,6 @@
 				<Pane fx:id="pane3" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<children>
 						<GlyphsBrowser layoutY="8.0" prefHeight="374.0" prefWidth="563.0" />
-					</children>
-				</Pane>
-				<Pane fx:id="paneHome" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-					<children>
-						<LineChart layoutX="10.0" layoutY="278.0" prefHeight="218.0" prefWidth="736.0">
-							<xAxis>
-								<CategoryAxis side="BOTTOM" />
-							</xAxis>
-							<yAxis>
-								<NumberAxis side="LEFT" />
-							</yAxis>
-						</LineChart>
-						<HBox layoutY="52.0" prefHeight="100.0" prefWidth="756.0">
-							<children>
-								<VBox alignment="CENTER" prefHeight="100.0" prefWidth="268.0" HBox.hgrow="ALWAYS">
-									<children>
-										<Label text="100" textFill="#6b1818">
-											<font>
-												<Font name="System Bold" size="34.0" />
-											</font>
-											<effect>
-												<Lighting>
-													<bumpInput>
-														<Shadow />
-													</bumpInput>
-													<light>
-														<Light.Distant />
-													</light>
-												</Lighting>
-											</effect>
-										</Label>
-										<Label alignment="TOP_CENTER" text="Học sinh đang học">
-											<font>
-												<Font size="15.0" />
-											</font>
-										</Label>
-									</children>
-								</VBox>
-								<VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="351.0">
-									<children>
-										<Label text="100" textFill="#6b1818">
-											<font>
-												<Font name="System Bold" size="34.0" />
-											</font>
-											<effect>
-												<Lighting>
-													<bumpInput>
-														<Shadow />
-													</bumpInput>
-													<light>
-														<Light.Distant />
-													</light>
-												</Lighting>
-											</effect>
-										</Label>
-										<Label alignment="TOP_CENTER" text="Học sinh đăng ký">
-											<font>
-												<Font size="15.0" />
-											</font>
-										</Label>
-									</children>
-								</VBox>
-								<VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="273.0">
-									<children>
-										<Label text="100" textFill="#6b1818">
-											<font>
-												<Font name="System Bold" size="34.0" />
-											</font>
-											<effect>
-												<Lighting>
-													<bumpInput>
-														<Shadow />
-													</bumpInput>
-													<light>
-														<Light.Distant />
-													</light>
-												</Lighting>
-											</effect>
-										</Label>
-										<Label alignment="TOP_CENTER" text="Học sinh chờ xét duyệt">
-											<font>
-												<Font size="15.0" />
-											</font>
-										</Label>
-									</children>
-								</VBox>
-							</children>
-						</HBox>
-						<HBox alignment="CENTER" layoutX="1.0" layoutY="-3.0" prefHeight="59.0" prefWidth="756.0">
-							<children>
-								<Label alignment="TOP_CENTER" text="Trang chủ" textAlignment="CENTER">
-									<font>
-										<Font name="System Bold" size="30.0" />
-									</font>
-								</Label>
-							</children>
-						</HBox>
-						<ScrollPane layoutX="31.0" layoutY="173.0" prefHeight="112.0" prefWidth="700.0">
-							<content>
-								<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="128.0" prefWidth="196.0" />
-							</content>
-						</ScrollPane>
-						<HBox alignment="CENTER" layoutX="11.0" layoutY="143.0" prefHeight="28.0" prefWidth="736.0">
-							<children>
-								<Label text="Thông báo" />
-							</children>
-						</HBox>
 					</children>
 				</Pane>
             <BorderPane fx:id="paneTableView2" layoutX="16.0" layoutY="80.0" prefHeight="440.0" prefWidth="1089.0">
@@ -188,8 +81,7 @@
 										<Font size="20.0" />
 									</font>
 								</Label>
-								<TextField layoutX="14.0" layoutY="46.0" prefHeight="26.0" prefWidth="213.0" />
-								<JFXButton layoutX="234.0" layoutY="46.0" style="-fx-background-color: #ede8da;" text="Tìm kiếm">
+								<JFXButton layoutX="234.0" layoutY="46.0" onAction="#searchID" style="-fx-background-color: #ede8da;" text="Tìm kiếm">
 									<graphic>
 										<FontAwesomeIcon iconName="SEARCH" />
 									</graphic>
@@ -205,6 +97,7 @@
 									</graphic>
 								</JFXButton>
                         <JFXComboBox fx:id="cbViewTable" layoutX="561.0" layoutY="46.0" onAction="#cbViewTableSelected" prefHeight="26.0" prefWidth="228.0" promptText="Xem thông tin điểm" />
+                        <JFXTextField fx:id="txtSearch" layoutX="14.0" layoutY="46.0" onKeyReleased="#searchPress" prefHeight="26.0" prefWidth="212.0" />
 							</children>
 						</Pane>
 					</top>
@@ -253,6 +146,113 @@
                   </ScrollPane>
                </center>
 				</BorderPane>
+				<Pane fx:id="paneHome" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<HBox layoutY="52.0" prefHeight="100.0" prefWidth="756.0">
+							<children>
+								<VBox alignment="CENTER" prefHeight="100.0" prefWidth="268.0" HBox.hgrow="ALWAYS">
+									<children>
+										<Label fx:id="labelHocSinhDangHoc" text="100" textFill="#6b1818">
+											<font>
+												<Font name="System Bold" size="34.0" />
+											</font>
+											<effect>
+												<Lighting>
+													<bumpInput>
+														<Shadow />
+													</bumpInput>
+													<light>
+														<Light.Distant />
+													</light>
+												</Lighting>
+											</effect>
+										</Label>
+										<Label alignment="TOP_CENTER" text="Sinh viên đang học">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Label>
+									</children>
+								</VBox>
+								<VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="351.0">
+									<children>
+										<Label fx:id="labelThiSinhTrungTuyen" text="100" textFill="#6b1818">
+											<font>
+												<Font name="System Bold" size="34.0" />
+											</font>
+											<effect>
+												<Lighting>
+													<bumpInput>
+														<Shadow />
+													</bumpInput>
+													<light>
+														<Light.Distant />
+													</light>
+												</Lighting>
+											</effect>
+										</Label>
+										<Label alignment="TOP_CENTER" text="Thí sinh trúng tuyển">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Label>
+									</children>
+								</VBox>
+								<VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="100.0" prefWidth="273.0">
+									<children>
+										<Label fx:id="labelThiSinhChoDuyet" text="100" textFill="#6b1818">
+											<font>
+												<Font name="System Bold" size="34.0" />
+											</font>
+											<effect>
+												<Lighting>
+													<bumpInput>
+														<Shadow />
+													</bumpInput>
+													<light>
+														<Light.Distant />
+													</light>
+												</Lighting>
+											</effect>
+										</Label>
+										<Label alignment="TOP_CENTER" text="Thí sinh chờ xét duyệt">
+											<font>
+												<Font size="15.0" />
+											</font>
+										</Label>
+									</children>
+								</VBox>
+							</children>
+						</HBox>
+						<HBox alignment="CENTER" layoutX="1.0" layoutY="-3.0" prefHeight="59.0" prefWidth="756.0">
+							<children>
+								<Label alignment="TOP_CENTER" text="Trang chủ" textAlignment="CENTER">
+									<font>
+										<Font name="System Bold" size="30.0" />
+									</font>
+								</Label>
+							</children>
+						</HBox>
+						<ScrollPane layoutX="31.0" layoutY="173.0" prefHeight="112.0" prefWidth="700.0">
+							<content>
+								<AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="168.0" prefWidth="680.0" />
+							</content>
+						</ScrollPane>
+						<HBox alignment="CENTER" layoutX="11.0" layoutY="143.0" prefHeight="28.0" prefWidth="736.0">
+							<children>
+								<Label text="Thông báo" />
+							</children>
+						</HBox>
+                  <BarChart fx:id="barchart" layoutX="31.0" layoutY="302.0" prefHeight="204.0" prefWidth="700.0">
+                    <xAxis>
+                      <CategoryAxis fx:id="categoryAxis" side="BOTTOM" />
+                    </xAxis>
+                    <yAxis>
+                      <NumberAxis fx:id="numberAxis" side="LEFT" />
+                    </yAxis>
+                  </BarChart>
+					</children>
+				</Pane>
 			</children>
 		</AnchorPane>
 		<AnchorPane prefHeight="510.0" prefWidth="194.0" style="-fx-background-color: #d3e0e3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">

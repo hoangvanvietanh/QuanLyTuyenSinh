@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import com.gdu.config.ConnectMongoDB;
+import com.gdu.entity.History;
 import com.gdu.entity.Scores;
 import com.gdu.entity.Student;
 import com.gdu.entity.StudentRegistration;
@@ -22,7 +23,7 @@ public class Model {
 	FindIterable<Document> findIterable;
 	public static List<Student> studentList = new ArrayList<Student>();
 	public static List<StudentRegistration> studentsRestrationList = new ArrayList<StudentRegistration>();
-	
+	public static List<History> historyList = new ArrayList<History>();
 	
 	public List<Student> getAllStudent()
 	{
@@ -36,6 +37,20 @@ public class Model {
 			studentList.add(s);
 		}		
 		return studentList;
+	}
+	
+	public List<History> getAllHistory()
+	{
+		findIterable = mongoDB.collectionHistory().find(new Document());
+		
+		for(Document doc: findIterable)
+		{
+			History s = g.fromJson(doc.toJson().toString(), History.class); 
+			//Scores sc =  s.getScore().get(0);
+			//System.out.println(sc.getLy_A2());
+			historyList.add(s);
+		}		
+		return historyList;
 	}
 	
 	public List<StudentRegistration> getAllStudentRegistration()
@@ -57,6 +72,13 @@ public class Model {
 		Document doc = new Document();
 		doc =  Document.parse(g.toJson(student));
 		mongoDB.collectionStudent().insertOne(doc);
+	}
+	
+	public void insertHistory(History history)
+	{
+		Document doc = new Document();
+		doc =  Document.parse(g.toJson(history));
+		mongoDB.collectionHistory().insertOne(doc);
 	}
 	
 	public void insertStudents(StudentRegistration student)

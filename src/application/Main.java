@@ -15,6 +15,8 @@ public class Main extends Application {
 		try {
 			Model model = new Model();
 			model.getAllStudent();
+			model.getAllStudentRegistration();
+			model.getAllHistory();
 			Parent root = FXMLLoader.load(getClass()
 	                   .getResource("../com/gdu/view/home.fxml"));
 	           primaryStage.setTitle("My Application");

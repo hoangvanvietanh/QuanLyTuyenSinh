@@ -2,11 +2,15 @@ package com.gdu.controller;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import com.gdu.entity.History;
 import com.gdu.entity.Student;
 import com.gdu.entity.StudentRegistration;
 import com.gdu.model.Model;
+import com.gdu.ultils.Time;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
@@ -231,13 +235,17 @@ public class AddStudentController {
 		if(modeUpdateOrNew.equals("update"))
 		{
 			model.updateStudents(student);
+			History history = new History();
+			history.setDate(Time.getDateTime());
+			history.setContent("Thí sinh có mã số " + txtStudentCode.getText() + " đã được chỉnh sửa thông tin");
+			model.insertHistory(history);
+			Model.historyList.add(history);
 			int index = -1;
         	for(StudentRegistration students : Model.studentsRestrationList)
         	{
         		if(students.getStudentCode().equals(txtStudentCode.getText()))
         		{
         			index = Model.studentsRestrationList.indexOf(students);
-        			
         		}
         	}
         	if(index != -1)
@@ -253,7 +261,12 @@ public class AddStudentController {
 		{
 			student.setStatus("Chờ duyệt");
 			model.insertStudents(student);
+			History history = new History();
+			history.setDate(Time.getDateTime());
+			history.setContent( txtFullName.getText() + " đã đăng ký tuyển sinh");
+			model.insertHistory(history);
 			Model.studentsRestrationList.add(student);
+			Model.historyList.add(history);
 		}
 		
 		Stage stage = (Stage) stageInformationOfStudent.getScene().getWindow();
