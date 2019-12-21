@@ -22,6 +22,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import com.gdu.entity.History;
 import com.gdu.entity.Status;
 import com.gdu.entity.Student;
 import com.gdu.entity.StudentRegistration;
@@ -30,6 +31,7 @@ import com.gdu.model.Model;
 import com.gdu.reports.PrintReport;
 import com.gdu.ultils.ChangeVietNamText;
 import com.gdu.ultils.GMail;
+import com.gdu.ultils.Time;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
@@ -139,6 +141,8 @@ public class HomeController implements Initializable {
     @FXML
     private TableColumn<StudentRegistration, String> literature_scores;
     @FXML
+    private TableColumn<StudentRegistration, String> major;
+    @FXML
     private AnchorPane stageHome;
     @FXML
     private ComboBox<String> cbViewTable;
@@ -162,18 +166,28 @@ public class HomeController implements Initializable {
     private Label labelThiSinhChoDuyet;
     
     @FXML
+    private Label labelThiSinhTruot;
+    
+    @FXML
     private AnchorPane anchorPane;
     
     @FXML
     public JFXTextField txtSearch;
     
-    private int thiSinhChoDuyet = 0;
+    @FXML
+    private JFXButton btnMatriculationReportFail;
     
-    private int thiSinhTrungTuyen = 0;
+    public int thiSinhChoDuyet = 0;
     
-    private int sinhVienDangHoc = 0;
+    public int thiSinhTrungTuyen = 0;
+    
+    public int thiSinhTruot = 0;
+    
+    public int sinhVienDangHoc = 0;
     
     private VBox vBox;
+    
+    
 	@FXML
 	private void buttonHomeClicked() {
 		paneHome.toFront();
@@ -185,6 +199,58 @@ public class HomeController implements Initializable {
 	@FXML
 	private void buttonStudentClicked() {
 		paneStudent.toFront();
+	}
+	
+	
+	@FXML
+	private void btnMatriculationReportFail()
+	{
+		PrintReport printReport = new PrintReport();
+    	try {
+			printReport.showReport(selectedStudent.getFullName(), selectedStudent.getDateOfBirth(), selectedStudent.getPlaceOfBirth(), selectedStudent.getIdOfStudent());
+			try {
+				GMail.sendMailFail(selectedStudent);
+				Model model = new Model();
+				selectedStudent.setStatus("Trượt");
+				model.updateStudents(selectedStudent);
+				int index = -1;
+	        	for(StudentRegistration students : Model.studentsRestrationList)
+	        	{
+	        		if(students.getStudentCode().equals(selectedStudent.getStudentCode()))
+	        		{
+	        			index = Model.studentsRestrationList.indexOf(students);
+	        		}
+	        	}
+	        	if(index != -1)
+	        	{
+	        		Model.studentsRestrationList.remove(index);
+	        		Model.studentsRestrationList.add(selectedStudent);
+	    			btnUpdateInfo.setVisible(true);
+	    			btnMatriculationReport.setVisible(false);
+	    			btnMatriculationReportFail.setVisible(false);
+	    			
+	    			History history = new History();
+	    			history.setDate(Time.getDateTime());
+	    			history.setContent("Thí sinh "+ selectedStudent.getFullName() + "có mã số " + selectedStudent.getStudentCode() + " trượt");
+	    			model.insertHistory(history);
+	    			Model.historyList.add(history);
+	    			
+	        		loadData();
+	        	}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
@@ -268,7 +334,7 @@ public class HomeController implements Initializable {
 		anchorPane.getChildren().clear();
 		anchorPane.getChildren().add(vBox);
 		
-		for(int i = Model.historyList.size()-1;i>0;i--)
+		for(int i = Model.historyList.size()-1;i>=0;i--)
 		{
 			Label label = new Label(Model.historyList.get(i).getDate() + " : " + Model.historyList.get(i).getContent());
 			vBox.getChildren().add(label);
@@ -292,9 +358,13 @@ public class HomeController implements Initializable {
 			{
 				thiSinhChoDuyet++;
 			}
-			else
+			else if(x.getStatus().equals("Trúng tuyển"))
 			{
 				thiSinhTrungTuyen++;
+			}
+			else
+			{
+				thiSinhTruot++;
 			}
 		});
 
@@ -303,12 +373,14 @@ public class HomeController implements Initializable {
 		data.setName("Sinh viên");
 		data.getData().add(new XYChart.Data("Học sinh đang học", sinhVienDangHoc));
 		data.getData().add(new XYChart.Data("Thí sinh trúng tuyển", thiSinhTrungTuyen));
+		data.getData().add(new XYChart.Data("Thí sinh trượt", thiSinhTruot));
 		data.getData().add(new XYChart.Data("Thí sinh chờ duyệt", thiSinhChoDuyet));
 		barchart.getData().add(data);
 		
 		labelHocSinhDangHoc.setText(String.valueOf(sinhVienDangHoc));
 		labelThiSinhTrungTuyen.setText(String.valueOf(thiSinhTrungTuyen));
 		labelThiSinhChoDuyet.setText(String.valueOf(thiSinhChoDuyet));
+		labelThiSinhTruot.setText(String.valueOf(thiSinhTruot));
 		
 		loadData();
 		ObservableList<String> itemsCBView = FXCollections.observableArrayList();
@@ -381,11 +453,13 @@ public class HomeController implements Initializable {
 		{
 			btnUpdateInfo.setVisible(true);
 	    	btnMatriculationReport.setVisible(true);
+	    	btnMatriculationReportFail.setVisible(true);
 		}
 		else
 		{
 			btnUpdateInfo.setVisible(true);
 			btnMatriculationReport.setVisible(false);
+			btnMatriculationReportFail.setVisible(false);
 		}
 		
 	}
@@ -420,6 +494,17 @@ public class HomeController implements Initializable {
 	        	{
 	        		Model.studentsRestrationList.remove(index);
 	        		Model.studentsRestrationList.add(selectedStudent);
+	    			btnUpdateInfo.setVisible(true);
+	    			btnMatriculationReport.setVisible(false);
+	    			btnMatriculationReportFail.setVisible(false);
+	    			
+	    			History history = new History();
+	    			history.setDate(Time.getDateTime());
+	    			history.setContent("Thí sinh "+ selectedStudent.getFullName() + " có mã số " + selectedStudent.getStudentCode() + " trúng tuyển");
+	    			model.insertHistory(history);
+	    			Model.historyList.add(history);
+	    			
+	    			
 	        		loadData();
 	        	}
 			} catch (Exception e) {
@@ -453,6 +538,7 @@ public class HomeController implements Initializable {
 		physical_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresInSchoolReport"));
 		chemistry_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresInSchoolReport"));
 		literature_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresInSchoolReport"));
+		major.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("majorRegistration"));
 		status.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
 		
 		stt1.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
@@ -488,6 +574,7 @@ public class HomeController implements Initializable {
 		physical_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresInSchoolReport"));
 		chemistry_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresInSchoolReport"));
 		literature_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresInSchoolReport"));
+		major.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("majorRegistration"));
 		status.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
 		
 		stt1.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
@@ -543,7 +630,8 @@ public class HomeController implements Initializable {
 		TableColumn<StudentRegistration, String> chemistry_scores = new TableColumn<StudentRegistration, String>("");
 		TableColumn<StudentRegistration, String> literature_scores = new TableColumn<StudentRegistration, String>("");
 		TableColumn<StudentRegistration, String> status = new TableColumn<StudentRegistration, String>("");
-
+		TableColumn<StudentRegistration, String> major = new TableColumn<StudentRegistration, String>("");
+		
 		stt.setCellValueFactory(column -> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue()) + 1));
 		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("fullName"));
 		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("dateOfBirth"));
@@ -565,6 +653,7 @@ public class HomeController implements Initializable {
 		literature_scores.setCellValueFactory(
 				new PropertyValueFactory<StudentRegistration, String>("literaryScoresInSchoolReport"));
 		status.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
+		major.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("majorRegistration"));
 		ObservableList<StudentRegistration> StudentRegistration = FXCollections
 				.observableArrayList(listStudentRegistration);
 //		ObservableList<StudentRegistration> title = FXCollections.observableArrayList();
@@ -608,6 +697,7 @@ public class HomeController implements Initializable {
 		columns.add(chemistry_scores);
 		columns.add(literature_scores);
 		columns.add(status);
+		columns.add(major);
 		Workbook workbook = new HSSFWorkbook();
 		Sheet spreadsheet = workbook.createSheet("sample");
 
@@ -632,6 +722,7 @@ public class HomeController implements Initializable {
 				row.createCell(10).setCellValue("Điểm");
 				row.createCell(11).setCellValue("Điểm");
 				row.createCell(12).setCellValue("Trạng thái");
+				row.createCell(13).setCellValue("Ngành học");
 			}
 			row = spreadsheet.createRow(i + 1);
 

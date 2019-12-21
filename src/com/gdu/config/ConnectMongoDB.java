@@ -17,11 +17,10 @@ public class ConnectMongoDB {
 
 	String database_name = "gia_dinh_university";
 	String collection_name = "students";
-	
-	MongoClientURI uri = new MongoClientURI(
-			"mongodb+srv://vietanh:113114115@cluster0-jfbgb.mongodb.net/test?retryWrites=true&w=majority");
+	public static String connectUri = "mongodb://localhost:27017";
 //	MongoClientURI uri = new MongoClientURI(
-//			"mongodb://localhost:27017");
+//			"mongodb+srv://vietanh:113114115@cluster0-jfbgb.mongodb.net/test?retryWrites=true&w=majority");
+	MongoClientURI uri = new MongoClientURI(connectUri);
 	MongoClient mongoClient = new MongoClient(uri);
 	MongoDatabase database = mongoClient.getDatabase(database_name);
 	
@@ -42,6 +41,12 @@ public class ConnectMongoDB {
 	public MongoCollection<Document> collectionStudentRegistration ()
 	{
 		MongoCollection<Document> collection = database.getCollection("students_registration");
+		return collection;
+	}
+	
+	public MongoCollection<Document> collectionAdmin()
+	{
+		MongoCollection<Document> collection = database.getCollection("admin");
 		return collection;
 	}
 //	public MongoCollection<Document> collection (String colectionName)

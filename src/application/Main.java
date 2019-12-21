@@ -13,12 +13,8 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
-			Model model = new Model();
-			model.getAllStudent();
-			model.getAllStudentRegistration();
-			model.getAllHistory();
 			Parent root = FXMLLoader.load(getClass()
-	                   .getResource("../com/gdu/view/home.fxml"));
+	                   .getResource("../com/gdu/view/login.fxml"));
 	           primaryStage.setTitle("My Application");
 	           primaryStage.setScene(new Scene(root));
 	           primaryStage.show();

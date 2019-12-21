@@ -135,6 +135,14 @@ public class AddStudentController {
 	
 	public void setData(StudentRegistration student) {
 		studentUpdate = student;
+		if(student.getGender().equals("Nam"))
+		{
+			radMale.setSelected(true);
+		}
+		else
+		{
+			radFemale.setSelected(true);
+		}
 		txtStudentCode.setText(student.getStudentCode());
 		txtFullName.setText(student.getFullName());
 		txtAddress.setText(student.getAddress());
@@ -237,7 +245,7 @@ public class AddStudentController {
 			model.updateStudents(student);
 			History history = new History();
 			history.setDate(Time.getDateTime());
-			history.setContent("Thí sinh có mã số " + txtStudentCode.getText() + " đã được chỉnh sửa thông tin");
+			history.setContent("Thí sinh"+ txtFullName.getText() + "có mã số " + txtStudentCode.getText() + " đã được chỉnh sửa thông tin");
 			model.insertHistory(history);
 			Model.historyList.add(history);
 			int index = -1;
