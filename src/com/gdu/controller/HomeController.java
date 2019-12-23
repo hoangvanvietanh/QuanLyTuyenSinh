@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
 
 import javax.xml.stream.events.StartDocument;
 
@@ -31,6 +32,7 @@ import com.gdu.model.Model;
 import com.gdu.reports.PrintReport;
 import com.gdu.ultils.ChangeVietNamText;
 import com.gdu.ultils.GMail;
+import com.gdu.ultils.Progress;
 import com.gdu.ultils.Time;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -59,6 +61,8 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -83,7 +87,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.swing.JRViewer;
 
 public class HomeController implements Initializable {
-	
+
 	private StudentRegistration selectedStudent = new StudentRegistration();
 
 	@FXML
@@ -93,277 +97,256 @@ public class HomeController implements Initializable {
 	private JFXButton buttonHome, buttonStudent, btnShowStudent, btnUpdateInfo, btnMatriculationReport;
 
 	@FXML
-    private TableView<StudentRegistration> tbData;
+	private TableView<StudentRegistration> tbData;
 	@FXML
-    private TableView<StudentRegistration> tbDataBasic;
+	private TableView<StudentRegistration> tbDataBasic;
 	@FXML
-	private TableColumn<String,String> stt;
+	private TableColumn<String, String> stt;
 	@FXML
-	private TableColumn<String,String> stt1;
+	private TableColumn<String, String> stt1;
 	@FXML
 	private TableColumn<StudentRegistration, String> status;
-    @FXML
-    private TableColumn<StudentRegistration, String> full_name;
-    @FXML
-    private TableColumn<StudentRegistration, String> date_of_birth;
-    @FXML
-    private TableColumn<StudentRegistration, String> place_of_birth;
-    @FXML
-    private TableColumn<StudentRegistration, String> full_name_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> date_of_birth_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> place_of_birth_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> gender_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> cmnd_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> email_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> phone_number_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> status_tbv2;
-    @FXML
-    private TableColumn<StudentRegistration, String> math_scores_US;
-    @FXML
-    private TableColumn<StudentRegistration, String> physical_scores_US;
-    @FXML
-    private TableColumn<StudentRegistration, String> chemistry_scores_US;
-    @FXML
-    private TableColumn<StudentRegistration, String> literature_scores_US;
-    @FXML
-    private TableColumn<StudentRegistration, String> math_scores;
-    @FXML
-    private TableColumn<StudentRegistration, String> physical_scores;
-    @FXML
-    private TableColumn<StudentRegistration, String> chemistry_scores;
-    @FXML
-    private TableColumn<StudentRegistration, String> literature_scores;
-    @FXML
-    private TableColumn<StudentRegistration, String> major;
-    @FXML
-    private AnchorPane stageHome;
-    @FXML
-    private ComboBox<String> cbViewTable;
-    
-    @FXML
-    private CategoryAxis categoryAxis;
+	@FXML
+	private TableColumn<StudentRegistration, String> full_name;
+	@FXML
+	private TableColumn<StudentRegistration, String> date_of_birth;
+	@FXML
+	private TableColumn<StudentRegistration, String> place_of_birth;
+	@FXML
+	private TableColumn<StudentRegistration, String> full_name_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> date_of_birth_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> place_of_birth_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> gender_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> cmnd_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> email_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> phone_number_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> status_tbv2;
+	@FXML
+	private TableColumn<StudentRegistration, String> math_scores_US;
+	@FXML
+	private TableColumn<StudentRegistration, String> physical_scores_US;
+	@FXML
+	private TableColumn<StudentRegistration, String> chemistry_scores_US;
+	@FXML
+	private TableColumn<StudentRegistration, String> literature_scores_US;
+	@FXML
+	private TableColumn<StudentRegistration, String> math_scores;
+	@FXML
+	private TableColumn<StudentRegistration, String> physical_scores;
+	@FXML
+	private TableColumn<StudentRegistration, String> chemistry_scores;
+	@FXML
+	private TableColumn<StudentRegistration, String> literature_scores;
+	@FXML
+	private TableColumn<StudentRegistration, String> major;
+	@FXML
+	private AnchorPane stageHome;
+	@FXML
+	private ComboBox<String> cbViewTable;
 
-    @FXML
-    private NumberAxis numberAxis;
-    
-    @FXML
-    private BarChart barchart;
-    
-    @FXML
-    private Label labelHocSinhDangHoc;
+	@FXML
+	private CategoryAxis categoryAxis;
 
-    @FXML
-    private Label labelThiSinhTrungTuyen;
+	@FXML
+	private NumberAxis numberAxis;
 
-    @FXML
-    private Label labelThiSinhChoDuyet;
-    
-    @FXML
-    private Label labelThiSinhTruot;
-    
-    @FXML
-    private AnchorPane anchorPane;
-    
-    @FXML
-    public JFXTextField txtSearch;
-    
-    @FXML
-    private JFXButton btnMatriculationReportFail;
-    
-    public int thiSinhChoDuyet = 0;
-    
-    public int thiSinhTrungTuyen = 0;
-    
-    public int thiSinhTruot = 0;
-    
-    public int sinhVienDangHoc = 0;
-    
-    private VBox vBox;
-    
-    
+	@FXML
+	private BarChart barchart;
+
+	@FXML
+	private Label labelHocSinhDangHoc;
+
+	@FXML
+	private Label labelThiSinhTrungTuyen;
+
+	@FXML
+	private Label labelThiSinhChoDuyet;
+
+	@FXML
+	private Label labelThiSinhTruot;
+
+	@FXML
+	private AnchorPane anchorPane;
+
+	@FXML
+	public JFXTextField txtSearch;
+
+	@FXML
+	private JFXButton btnMatriculationReportFail;
+
+	public int thiSinhChoDuyet = 0;
+
+	public int thiSinhTrungTuyen = 0;
+
+	public int thiSinhTruot = 0;
+
+	public int sinhVienDangHoc = 0;
+
+	private VBox vBox;
+
 	@FXML
 	private void buttonHomeClicked() {
 		paneHome.toFront();
 		btnShowStudent.setVisible(false);
 		btnUpdateInfo.setVisible(false);
-	    btnMatriculationReport.setVisible(false);
+		btnMatriculationReport.setVisible(false);
 	}
-	
+
 	@FXML
 	private void buttonStudentClicked() {
 		paneStudent.toFront();
 	}
-	
-	
+
 	@FXML
-	private void btnMatriculationReportFail()
-	{
+	private void btnMatriculationReportFail() {
 		PrintReport printReport = new PrintReport();
-    	try {
-			printReport.showReport(selectedStudent.getFullName(), selectedStudent.getDateOfBirth(), selectedStudent.getPlaceOfBirth(), selectedStudent.getIdOfStudent());
-			try {
-				GMail.sendMailFail(selectedStudent);
-				Model model = new Model();
-				selectedStudent.setStatus("Trượt");
-				model.updateStudents(selectedStudent);
-				int index = -1;
-	        	for(StudentRegistration students : Model.studentsRestrationList)
-	        	{
-	        		if(students.getStudentCode().equals(selectedStudent.getStudentCode()))
-	        		{
-	        			index = Model.studentsRestrationList.indexOf(students);
-	        		}
-	        	}
-	        	if(index != -1)
-	        	{
-	        		Model.studentsRestrationList.remove(index);
-	        		Model.studentsRestrationList.add(selectedStudent);
-	    			btnUpdateInfo.setVisible(true);
-	    			btnMatriculationReport.setVisible(false);
-	    			btnMatriculationReportFail.setVisible(false);
-	    			
-	    			History history = new History();
-	    			history.setDate(Time.getDateTime());
-	    			history.setContent("Thí sinh "+ selectedStudent.getFullName() + "có mã số " + selectedStudent.getStudentCode() + " trượt");
-	    			model.insertHistory(history);
-	    			Model.historyList.add(history);
-	    			
-	        		loadData();
-	        	}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		try {
+			printReport.showReport(selectedStudent);
+			GMail.sendMailFail(selectedStudent);
+			Model model = new Model();
+			selectedStudent.setStatus("Trượt");
+			model.updateStudents(selectedStudent);
+			int index = -1;
+			for (StudentRegistration students : Model.studentsRestrationList) {
+				if (students.getStudentCode().equals(selectedStudent.getStudentCode())) {
+					index = Model.studentsRestrationList.indexOf(students);
+				}
 			}
-    	} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JRException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+			if (index != -1) {
+				Model.studentsRestrationList.remove(index);
+				Model.studentsRestrationList.add(selectedStudent);
+				btnUpdateInfo.setVisible(true);
+				btnMatriculationReport.setVisible(false);
+				btnMatriculationReportFail.setVisible(false);
+
+				History history = new History();
+				history.setDate(Time.getDateTime());
+				history.setContent("Thí sinh " + selectedStudent.getFullName() + "có mã số "
+						+ selectedStudent.getStudentCode() + " trượt");
+				model.insertHistory(history);
+				Model.historyList.add(history);
+				loadData();
+				thiSinhTruot++;
+				thiSinhChoDuyet--;
+				labelThiSinhTruot.setText(String.valueOf(thiSinhTruot));
+				labelThiSinhChoDuyet.setText(String.valueOf(thiSinhChoDuyet));
+			}
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
-	private void searchID()
-	{
+	private void searchID() {
 		List<StudentRegistration> studentRegistrations = new ArrayList<StudentRegistration>();
-		Model.studentsRestrationList.forEach((x)->{
-			if(x.getFullName().equals(txtSearch.getText()))
-			{
+		Model.studentsRestrationList.forEach((x) -> {
+			if (x.getFullName().equals(txtSearch.getText())) {
 				studentRegistrations.add(x);
 			}
 		});
-		if(txtSearch.getText().equals("1"))
-		{
+		if (txtSearch.getText().equals("1")) {
 			searchTable(Model.studentsRestrationList);
 		}
 		searchTable(studentRegistrations);
 	}
-	
+
 	@FXML
-	private void searchPress()
-	{
+	private void searchPress() {
 		System.out.println(txtSearch.getText());
-		ObservableList<StudentRegistration> StudentRegistration = FXCollections.observableArrayList(Model.studentsRestrationList);
-		addTextFilter(StudentRegistration,txtSearch,tbData);
-		addTextFilter(StudentRegistration,txtSearch,tbDataBasic);
+		ObservableList<StudentRegistration> StudentRegistration = FXCollections
+				.observableArrayList(Model.studentsRestrationList);
+		addTextFilter(StudentRegistration, txtSearch, tbData);
+		addTextFilter(StudentRegistration, txtSearch, tbDataBasic);
 	}
-	
+
 	@FXML
-	private void reportClicked() throws IOException
-	{
+	private void reportClicked() throws IOException {
 		Stage stage = (Stage) stageHome.getScene().getWindow();
 		DirectoryChooser directoryChooser = new DirectoryChooser();
 		directoryChooser.setTitle("Chọn đường dẫn lưu file");
 		File selectedDirectory = directoryChooser.showDialog(stage);
 
-		if(selectedDirectory == null){
-		     //No Directory selected
-		}else{
-			if(cbViewTable.getSelectionModel().getSelectedItem().equals("Xem thông tin cơ bản"))
-			{
-				exportFileExcelBasicInfo(Model.studentsRestrationList,selectedDirectory.getAbsolutePath());
+		if (selectedDirectory == null) {
+			// No Directory selected
+		} else {
+			if (cbViewTable.getSelectionModel().getSelectedItem().equals("Xem thông tin cơ bản")) {
+				exportFileExcelBasicInfo(Model.studentsRestrationList, selectedDirectory.getAbsolutePath());
+			} else {
+				exportFileExcel(Model.studentsRestrationList, selectedDirectory.getAbsolutePath());
 			}
-			else
-			{
-				exportFileExcel(Model.studentsRestrationList,selectedDirectory.getAbsolutePath());
-			}
-			
+
 		}
-		
+
 	}
-	
+
 	@FXML
 	private void btnRegistrationClicked() {
 		try {
-		    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
-		    Parent root1 = (Parent) fxmlLoader.load();
-		    Stage stage = new Stage();
-		   // stage.initModality(Modality.APPLICATION_MODAL);
-		   // stage.initStyle(StageStyle.UNDECORATED);
-		    stage.setTitle("Đăng ký");
-		    stage.setScene(new Scene(root1));  
-		    stage.show();
-		    stage.setOnHidden(new EventHandler<WindowEvent>() {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			Stage stage = new Stage();
+			// stage.initModality(Modality.APPLICATION_MODAL);
+			// stage.initStyle(StageStyle.UNDECORATED);
+			stage.setTitle("Đăng ký");
+			stage.setScene(new Scene(root1));
+			stage.show();
+			stage.setOnHidden(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
 					System.out.println("Đã load data");
 					loadData();
 					loadHistory();
+					thiSinhChoDuyet++;
+					labelThiSinhChoDuyet.setText(String.valueOf(thiSinhChoDuyet));
 				}
 			});
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
 	}
 
-	public void loadHistory()
-	{
+	public void loadHistory() {
 		vBox = new VBox();
 		anchorPane.getChildren().clear();
 		anchorPane.getChildren().add(vBox);
-		
-		for(int i = Model.historyList.size()-1;i>=0;i--)
-		{
+
+		for (int i = Model.historyList.size() - 1; i >= 0; i--) {
 			Label label = new Label(Model.historyList.get(i).getDate() + " : " + Model.historyList.get(i).getContent());
 			vBox.getChildren().add(label);
 		}
-		
+
 //		Model.historyList.forEach((x)->{
 //			Label label = new Label(x.getDate() +" : " +x.getContent());
 //			vBox.getChildren().add(label);
 //		});
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		Model model = new Model();
+		model.getAllStudent();
+		model.getAllStudentRegistration();
+		model.getAllHistory();
+
 		numberAxis.setLabel("Số học sinh");
 		categoryAxis.setLabel("Loại học sinh");
 		loadHistory();
-		
-		Model.studentsRestrationList.forEach((x)->{
-			if(x.getStatus().equals("Chờ duyệt"))
-			{
+
+		Model.studentsRestrationList.forEach((x) -> {
+			if (x.getStatus().equals("Chờ duyệt")) {
 				thiSinhChoDuyet++;
-			}
-			else if(x.getStatus().equals("Trúng tuyển"))
-			{
+			} else if (x.getStatus().equals("Trúng tuyển")) {
 				thiSinhTrungTuyen++;
-			}
-			else
-			{
+			} else {
 				thiSinhTruot++;
 			}
 		});
@@ -376,36 +359,35 @@ public class HomeController implements Initializable {
 		data.getData().add(new XYChart.Data("Thí sinh trượt", thiSinhTruot));
 		data.getData().add(new XYChart.Data("Thí sinh chờ duyệt", thiSinhChoDuyet));
 		barchart.getData().add(data);
-		
+
 		labelHocSinhDangHoc.setText(String.valueOf(sinhVienDangHoc));
 		labelThiSinhTrungTuyen.setText(String.valueOf(thiSinhTrungTuyen));
 		labelThiSinhChoDuyet.setText(String.valueOf(thiSinhChoDuyet));
 		labelThiSinhTruot.setText(String.valueOf(thiSinhTruot));
-		
+
 		loadData();
 		ObservableList<String> itemsCBView = FXCollections.observableArrayList();
 		itemsCBView.add("Xem thông tin cơ bản");
 		itemsCBView.add("Xem thông tin điểm");
 		cbViewTable.setItems(itemsCBView);
 		cbViewTable.getSelectionModel().select("Xem thông tin điểm");
-		
-		
+
 	}
+
 	@FXML
-	private void btnUpdateInfo()
-	{
+	private void btnUpdateInfo() {
 		try {
-		    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
-		    Parent root1 = (Parent) fxmlLoader.load();
-		    AddStudentController addStudentController = fxmlLoader.getController();
-		    addStudentController.setData(selectedStudent);
-		    Stage stage = new Stage();
-		   // stage.initModality(Modality.APPLICATION_MODAL);
-		   // stage.initStyle(StageStyle.UNDECORATED);
-		    stage.setTitle("Sửa thông tin thí sinh");
-		    stage.setScene(new Scene(root1));  
-		    stage.show();
-		    stage.setOnHidden(new EventHandler<WindowEvent>() {
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/addStudent.fxml"));
+			Parent root1 = (Parent) fxmlLoader.load();
+			AddStudentController addStudentController = fxmlLoader.getController();
+			addStudentController.setData(selectedStudent);
+			Stage stage = new Stage();
+			// stage.initModality(Modality.APPLICATION_MODAL);
+			// stage.initStyle(StageStyle.UNDECORATED);
+			stage.setTitle("Sửa thông tin thí sinh");
+			stage.setScene(new Scene(root1));
+			stage.show();
+			stage.setOnHidden(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
 					System.out.println("Đã load data");
@@ -413,191 +395,212 @@ public class HomeController implements Initializable {
 					loadHistory();
 				}
 			});
-		    stage.setOnShown(new EventHandler<WindowEvent>() {
+			stage.setOnShown(new EventHandler<WindowEvent>() {
 				@Override
 				public void handle(WindowEvent event) {
 					System.out.println("ok con dê");
 				}
 			});
-		}catch (Exception e) {
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 	}
-	
+
 	@FXML
-	private void cbViewTableSelected()
-	{	
-		if(cbViewTable.getSelectionModel().getSelectedItem().equals("Xem thông tin cơ bản"))
-		{
+	private void cbViewTableSelected() {
+		if (cbViewTable.getSelectionModel().getSelectedItem().equals("Xem thông tin cơ bản")) {
 			paneTableView2.toFront();
-		}
-		else
-		{
+		} else {
 			paneStudent.toFront();
 		}
 	}
+
 	@FXML
-    private void btnSelectedRow()
-    {
-    	StudentRegistration sv = tbData.getSelectionModel().getSelectedItem();
-    	selectedStudent = sv;
-    	controlButtonOfStudent(sv);
-    	
-    }
-	
-	private void controlButtonOfStudent(StudentRegistration student)
-	{
+	private void btnSelectedRow() {
+		StudentRegistration sv = tbData.getSelectionModel().getSelectedItem();
+		selectedStudent = sv;
+		controlButtonOfStudent(sv);
+
+	}
+
+	private void controlButtonOfStudent(StudentRegistration student) {
 		btnShowStudent.setVisible(true);
-    	btnShowStudent.setText(student.getFullName());
-		if(student.getStatus().equals("Chờ duyệt"))
-		{
+		btnShowStudent.setText(student.getFullName());
+		if (student.getStatus().equals("Chờ duyệt")) {
 			btnUpdateInfo.setVisible(true);
-	    	btnMatriculationReport.setVisible(true);
-	    	btnMatriculationReportFail.setVisible(true);
-		}
-		else
-		{
+			btnMatriculationReport.setVisible(true);
+			btnMatriculationReportFail.setVisible(true);
+		} else {
 			btnUpdateInfo.setVisible(true);
 			btnMatriculationReport.setVisible(false);
 			btnMatriculationReportFail.setVisible(false);
 		}
-		
+
 	}
+
 	@FXML
-    private void btnSelectedRow2()
-    {
-    	StudentRegistration sv = tbDataBasic.getSelectionModel().getSelectedItem();
-    	selectedStudent = sv;
-    	controlButtonOfStudent(sv);
-    }
-	
+	private void btnSelectedRow2() {
+		StudentRegistration sv = tbDataBasic.getSelectionModel().getSelectedItem();
+		selectedStudent = sv;
+		controlButtonOfStudent(sv);
+	}
+
 	@FXML
-	private void btnMatriculationReport()
-	{
-		PrintReport printReport = new PrintReport();
-    	try {
-			printReport.showReport(selectedStudent.getFullName(), selectedStudent.getDateOfBirth(), selectedStudent.getPlaceOfBirth(), selectedStudent.getIdOfStudent());
-			try {
-				GMail.sendMail(selectedStudent);
-				Model model = new Model();
-				selectedStudent.setStatus("Trúng tuyển");
-				model.updateStudents(selectedStudent);
-				int index = -1;
-	        	for(StudentRegistration students : Model.studentsRestrationList)
-	        	{
-	        		if(students.getStudentCode().equals(selectedStudent.getStudentCode()))
-	        		{
-	        			index = Model.studentsRestrationList.indexOf(students);
-	        		}
-	        	}
-	        	if(index != -1)
-	        	{
-	        		Model.studentsRestrationList.remove(index);
-	        		Model.studentsRestrationList.add(selectedStudent);
-	    			btnUpdateInfo.setVisible(true);
-	    			btnMatriculationReport.setVisible(false);
-	    			btnMatriculationReportFail.setVisible(false);
-	    			
-	    			History history = new History();
-	    			history.setDate(Time.getDateTime());
-	    			history.setContent("Thí sinh "+ selectedStudent.getFullName() + " có mã số " + selectedStudent.getStudentCode() + " trúng tuyển");
-	    			model.insertHistory(history);
-	    			Model.historyList.add(history);
-	    			
-	    			
-	        		loadData();
-	        	}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	private void btnMatriculationReport() {
+		/*
+		 * try { PrintReport printReport = new PrintReport();
+		 * printReport.saveReport(selectedStudent.getFullName(),
+		 * selectedStudent.getDateOfBirth(), selectedStudent.getPlaceOfBirth(),
+		 * selectedStudent.getIdOfStudent()); GMail.sendMail(selectedStudent); Model
+		 * model = new Model(); selectedStudent.setStatus("Trúng tuyển");
+		 * model.updateStudents(selectedStudent); int index = -1; for
+		 * (StudentRegistration students : Model.studentsRestrationList) { if
+		 * (students.getStudentCode().equals(selectedStudent.getStudentCode())) { index
+		 * = Model.studentsRestrationList.indexOf(students); } } if (index != -1) {
+		 * Model.studentsRestrationList.remove(index);
+		 * Model.studentsRestrationList.add(selectedStudent);
+		 * 
+		 * History history = new History(); history.setDate(Time.getDateTime());
+		 * history.setContent("Thí sinh " + selectedStudent.getFullName() + " có mã số "
+		 * + selectedStudent.getStudentCode() + " trúng tuyển");
+		 * model.insertHistory(history); Model.historyList.add(history); loadData(); } }
+		 * catch (Exception e) { // TODO Auto-generated catch block e.printStackTrace();
+		 * }
+		 * 
+		 * btnUpdateInfo.setVisible(true); btnMatriculationReport.setVisible(false);
+		 * btnMatriculationReportFail.setVisible(false);
+		 */
+
+		Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+		alert.setTitle("Thông báo");
+		alert.setContentText("Cập nhật kết quả cho thí sinh " + selectedStudent.getFullName());
+		ButtonType okButton = new ButtonType("Tiếp tục");
+		ButtonType noButton = new ButtonType("Hủy", ButtonBar.ButtonData.NO);
+		// ButtonType cancelButton = new ButtonType("Yes",
+		// ButtonBar.ButtonData.CANCEL_CLOSE);
+		alert.getButtonTypes().setAll(noButton, okButton);
+		alert.showAndWait().ifPresent(type -> {
+			if (type == okButton) {
+				try {
+					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../view/progress.fxml"));
+					Parent root1 = (Parent) fxmlLoader.load();
+					ProgressController progressController = fxmlLoader.getController();
+					progressController.setData(selectedStudent);
+					// stage.initModality(Modality.APPLICATION_MODAL);
+					// stage.initStyle(StageStyle.UNDECORATED);
+					Stage stage = new Stage();
+					stage.setTitle("Thông báo");
+					stage.setScene(new Scene(root1));
+					stage.show();
+					stage.setOnHidden(new EventHandler<WindowEvent>() {
+						@Override
+						public void handle(WindowEvent event) {
+							loadData();
+							loadHistory();
+							btnUpdateInfo.setVisible(true);
+							btnMatriculationReport.setVisible(false);
+							btnMatriculationReportFail.setVisible(false);
+							thiSinhTrungTuyen++;
+							thiSinhChoDuyet--;
+							labelThiSinhTruot.setText(String.valueOf(thiSinhTrungTuyen));
+							labelThiSinhChoDuyet.setText(String.valueOf(thiSinhChoDuyet));
+						}
+					});
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
-    	} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JRException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		});
 	}
-	
-	private void loadData()
-	{   
-		stt.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
+
+	private void loadData() {
+		stt.setCellValueFactory(column -> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue()) + 1));
 		stt.setSortable(false);
-		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
-		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
-		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
-		math_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresOfGraduationTest"));
-		physical_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresOfGraduationTest"));
-		chemistry_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresOfGraduationTest"));
-		literature_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresOfGraduationTest"));
-		math_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresInSchoolReport"));
-		physical_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresInSchoolReport"));
-		chemistry_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresInSchoolReport"));
-		literature_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresInSchoolReport"));
+		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("fullName"));
+		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("dateOfBirth"));
+		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("placeOfBirth"));
+		math_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("mathScoresOfGraduationTest"));
+		physical_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("physicsScoresOfGraduationTest"));
+		chemistry_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("chemistryScoresOfGraduationTest"));
+		literature_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("literaryScoresOfGraduationTest"));
+		math_scores
+				.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("mathScoresInSchoolReport"));
+		physical_scores.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("physicsScoresInSchoolReport"));
+		chemistry_scores.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("chemistryScoresInSchoolReport"));
+		literature_scores.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("literaryScoresInSchoolReport"));
 		major.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("majorRegistration"));
 		status.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
-		
-		stt1.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
+
+		stt1.setCellValueFactory(column -> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue()) + 1));
 		stt1.setSortable(false);
-		full_name_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
-		date_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
-		place_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
-		gender_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("gender"));
-		cmnd_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("idOfStudent"));
-		email_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("email"));
-		phone_number_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("phoneNumber"));
-		status_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("status"));
-		
-		ObservableList<StudentRegistration> StudentRegistration = FXCollections.observableArrayList(Model.studentsRestrationList);
+		full_name_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("fullName"));
+		date_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("dateOfBirth"));
+		place_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("placeOfBirth"));
+		gender_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("gender"));
+		cmnd_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("idOfStudent"));
+		email_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("email"));
+		phone_number_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("phoneNumber"));
+		status_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
+
+		ObservableList<StudentRegistration> StudentRegistration = FXCollections
+				.observableArrayList(Model.studentsRestrationList);
 		tbData.setItems(StudentRegistration);
 		tbDataBasic.setItems(StudentRegistration);
 		tbData.refresh();
 		tbDataBasic.refresh();
 	}
-	
-	private void searchTable(List<StudentRegistration> studentList)
-	{   
-		stt.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
+
+	private void searchTable(List<StudentRegistration> studentList) {
+		stt.setCellValueFactory(column -> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue()) + 1));
 		stt.setSortable(false);
-		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
-		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
-		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
-		math_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresOfGraduationTest"));
-		physical_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresOfGraduationTest"));
-		chemistry_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresOfGraduationTest"));
-		literature_scores_US.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresOfGraduationTest"));
-		math_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("mathScoresInSchoolReport"));
-		physical_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("physicsScoresInSchoolReport"));
-		chemistry_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("chemistryScoresInSchoolReport"));
-		literature_scores.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("literaryScoresInSchoolReport"));
+		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("fullName"));
+		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("dateOfBirth"));
+		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("placeOfBirth"));
+		math_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("mathScoresOfGraduationTest"));
+		physical_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("physicsScoresOfGraduationTest"));
+		chemistry_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("chemistryScoresOfGraduationTest"));
+		literature_scores_US.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("literaryScoresOfGraduationTest"));
+		math_scores
+				.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("mathScoresInSchoolReport"));
+		physical_scores.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("physicsScoresInSchoolReport"));
+		chemistry_scores.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("chemistryScoresInSchoolReport"));
+		literature_scores.setCellValueFactory(
+				new PropertyValueFactory<StudentRegistration, String>("literaryScoresInSchoolReport"));
 		major.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("majorRegistration"));
 		status.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
-		
-		stt1.setCellValueFactory(column-> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue())+1));
+
+		stt1.setCellValueFactory(column -> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue()) + 1));
 		stt1.setSortable(false);
-		full_name_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
-		date_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
-		place_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
-		gender_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("gender"));
-		cmnd_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("idOfStudent"));
-		email_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("email"));
-		phone_number_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("phoneNumber"));
-		status_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("status"));
-		
+		full_name_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("fullName"));
+		date_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("dateOfBirth"));
+		place_of_birth_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("placeOfBirth"));
+		gender_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("gender"));
+		cmnd_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("idOfStudent"));
+		email_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("email"));
+		phone_number_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("phoneNumber"));
+		status_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
+
 		ObservableList<StudentRegistration> StudentRegistration = FXCollections.observableArrayList(studentList);
 		tbData.setItems(StudentRegistration);
 		tbDataBasic.setItems(StudentRegistration);
 		tbData.refresh();
 		tbDataBasic.refresh();
 	}
-	
-	
-	private void exportFileExcel(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException
-	{
+
+	private void exportFileExcel(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException {
 		List<StudentRegistration> listStudentRegistration = listStudent;
 //        TableView<Person> table = new TableView<Person>();
 //
@@ -631,7 +634,7 @@ public class HomeController implements Initializable {
 		TableColumn<StudentRegistration, String> literature_scores = new TableColumn<StudentRegistration, String>("");
 		TableColumn<StudentRegistration, String> status = new TableColumn<StudentRegistration, String>("");
 		TableColumn<StudentRegistration, String> major = new TableColumn<StudentRegistration, String>("");
-		
+
 		stt.setCellValueFactory(column -> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue()) + 1));
 		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("fullName"));
 		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("dateOfBirth"));
@@ -713,14 +716,14 @@ public class HomeController implements Initializable {
 				row.createCell(1).setCellValue("Họ tên");
 				row.createCell(2).setCellValue("Ngày sinh");
 				row.createCell(3).setCellValue("Nơi sinh");
-				row.createCell(4).setCellValue("Điểm");
-				row.createCell(5).setCellValue("Điểm");
-				row.createCell(6).setCellValue("Điểm");
-				row.createCell(7).setCellValue("Điểm");
-				row.createCell(8).setCellValue("Điểm");
-				row.createCell(9).setCellValue("Điểm");
-				row.createCell(10).setCellValue("Điểm");
-				row.createCell(11).setCellValue("Điểm");
+				row.createCell(4).setCellValue("Điểm Toán ĐH");
+				row.createCell(5).setCellValue("Điểm Lý ĐH");
+				row.createCell(6).setCellValue("Điểm Hóa ĐH");
+				row.createCell(7).setCellValue("Điểm Văn ĐH");
+				row.createCell(8).setCellValue("Điểm Toán TN");
+				row.createCell(9).setCellValue("Điểm Lý TN");
+				row.createCell(10).setCellValue("Điểm Hóa TN");
+				row.createCell(11).setCellValue("Điểm Văn TN");
 				row.createCell(12).setCellValue("Trạng thái");
 				row.createCell(13).setCellValue("Ngành học");
 			}
@@ -735,19 +738,19 @@ public class HomeController implements Initializable {
 			}
 		}
 
-		FileOutputStream fileOut = new FileOutputStream(pathSaveFile+"/danh_sach_hoc_sinh.xls");
+		FileOutputStream fileOut = new FileOutputStream(pathSaveFile + "/danh_sach_hoc_sinh.xls");
 		workbook.write(fileOut);
 		fileOut.close();
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Thông báo");
 		alert.setHeaderText("File danh sách học sinh được lưu ở :");
 		alert.setContentText(pathSaveFile);
 		alert.showAndWait();
 	}
-	
-	private void exportFileExcelBasicInfo(List<StudentRegistration> listStudent, String pathSaveFile) throws IOException
-	{
+
+	private void exportFileExcelBasicInfo(List<StudentRegistration> listStudent, String pathSaveFile)
+			throws IOException {
 		List<StudentRegistration> listStudentRegistration = listStudent;
 		TableView<StudentRegistration> tbData = new TableView<StudentRegistration>();
 		TableColumn<StudentRegistration, String> stt = new TableColumn<StudentRegistration, String>("");
@@ -757,19 +760,18 @@ public class HomeController implements Initializable {
 		TableColumn<StudentRegistration, String> gender_tbv2 = new TableColumn<StudentRegistration, String>("");
 		TableColumn<StudentRegistration, String> cmnd_tbv2 = new TableColumn<StudentRegistration, String>("");
 		TableColumn<StudentRegistration, String> email_tbv2 = new TableColumn<StudentRegistration, String>("");
-		TableColumn<StudentRegistration, String> phone_number_tbv2 = new TableColumn<StudentRegistration, String>(
-				"");
+		TableColumn<StudentRegistration, String> phone_number_tbv2 = new TableColumn<StudentRegistration, String>("");
 		TableColumn<StudentRegistration, String> status_tbv2 = new TableColumn<StudentRegistration, String>("");
 
 		stt.setCellValueFactory(column -> new ReadOnlyObjectWrapper(tbData.getItems().indexOf(column.getValue()) + 1));
-		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("fullName"));
-		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("dateOfBirth"));
-		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("placeOfBirth"));
-		gender_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("gender"));
-		cmnd_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("idOfStudent"));
-		email_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("email"));
-		phone_number_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("phoneNumber"));
-		status_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration,String>("status"));
+		full_name.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("fullName"));
+		date_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("dateOfBirth"));
+		place_of_birth.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("placeOfBirth"));
+		gender_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("gender"));
+		cmnd_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("idOfStudent"));
+		email_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("email"));
+		phone_number_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("phoneNumber"));
+		status_tbv2.setCellValueFactory(new PropertyValueFactory<StudentRegistration, String>("status"));
 		ObservableList<StudentRegistration> StudentRegistration = FXCollections
 				.observableArrayList(listStudentRegistration);
 		tbData.setItems(StudentRegistration);
@@ -814,54 +816,52 @@ public class HomeController implements Initializable {
 				}
 			}
 		}
-		
+
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Thông báo");
 		alert.setHeaderText("File danh sách học sinh được lưu ở :");
 		alert.setContentText(pathSaveFile);
 		alert.showAndWait();
-		
-		
-		FileOutputStream fileOut = new FileOutputStream(pathSaveFile+"/danh_sach_thong_tin_hoc_sinh.xls");
+
+		FileOutputStream fileOut = new FileOutputStream(pathSaveFile + "/danh_sach_thong_tin_hoc_sinh.xls");
 		workbook.write(fileOut);
 		fileOut.close();
-		
-		
+
 	}
-	
-	public <T> void addTextFilter(ObservableList<T> allData,
-	        JFXTextField filterField, TableView<T> table) {
 
-	    final List<TableColumn<T, ?>> columns = table.getColumns();
+	public <T> void addTextFilter(ObservableList<T> allData, JFXTextField filterField, TableView<T> table) {
 
-	    FilteredList<T> filteredData = new FilteredList<>(allData);
-	    filteredData.predicateProperty().bind(Bindings.createObjectBinding(() -> {
-	        String text = filterField.getText();
+		final List<TableColumn<T, ?>> columns = table.getColumns();
 
-	        if (text == null || text.isEmpty()) {
-	            return null;
-	        }
-	        final String filterText = text.toLowerCase();
+		FilteredList<T> filteredData = new FilteredList<>(allData);
+		filteredData.predicateProperty().bind(Bindings.createObjectBinding(() -> {
+			String text = filterField.getText();
 
-	        return o -> {
-	            for (TableColumn<T, ?> col : columns) {
-	                ObservableValue<?> observable = col.getCellObservableValue(o);
-	                if (observable != null) {
-	                    Object value = observable.getValue();
-	                    if (value != null && value.toString().toLowerCase().indexOf(filterText) >= 0) {
-	                        return true;
-	                    }
-	                    if (value != null && ChangeVietNamText.removeAccent(value.toString().toLowerCase()).indexOf(filterText) >= 0) {
-	                        return true;
-	                    }
-	                }
-	            }
-	            return false;
-	        };
-	    }, filterField.textProperty()));
+			if (text == null || text.isEmpty()) {
+				return null;
+			}
+			final String filterText = text.toLowerCase();
 
-	    SortedList<T> sortedData = new SortedList<>(filteredData);
-	    sortedData.comparatorProperty().bind(table.comparatorProperty());
-	    table.setItems(sortedData);
+			return o -> {
+				for (TableColumn<T, ?> col : columns) {
+					ObservableValue<?> observable = col.getCellObservableValue(o);
+					if (observable != null) {
+						Object value = observable.getValue();
+						if (value != null && value.toString().toLowerCase().indexOf(filterText) >= 0) {
+							return true;
+						}
+						if (value != null && ChangeVietNamText.removeAccent(value.toString().toLowerCase())
+								.indexOf(filterText) >= 0) {
+							return true;
+						}
+					}
+				}
+				return false;
+			};
+		}, filterField.textProperty()));
+
+		SortedList<T> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(table.comparatorProperty());
+		table.setItems(sortedData);
 	}
 }

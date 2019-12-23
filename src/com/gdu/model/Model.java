@@ -64,7 +64,7 @@ public class Model {
 			History s = g.fromJson(doc.toJson().toString(), History.class); 
 			//Scores sc =  s.getScore().get(0);
 			//System.out.println(sc.getLy_A2());
-			System.out.println(s.getContent());
+			//System.out.println(s.getContent());
 			historyList.add(s);
 		}		
 		return historyList;

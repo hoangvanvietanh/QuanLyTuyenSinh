@@ -15,7 +15,7 @@ public class Main extends Application {
 		try {
 			Parent root = FXMLLoader.load(getClass()
 	                   .getResource("../com/gdu/view/login.fxml"));
-	           primaryStage.setTitle("My Application");
+	           primaryStage.setTitle("Đăng nhập");
 	           primaryStage.setScene(new Scene(root));
 	           primaryStage.show();
 		} catch(Exception e) {

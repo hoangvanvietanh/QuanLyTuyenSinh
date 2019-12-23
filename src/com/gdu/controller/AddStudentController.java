@@ -1,9 +1,11 @@
 package com.gdu.controller;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import com.gdu.entity.History;
@@ -130,6 +132,8 @@ public class AddStudentController {
 		
 		cbMajor.setItems(list2);
 		cbMajor.setValue("Kỹ Thuật Phần Mềm");
+		
+	    dateOfBirth.setValue(LocalDate.now());
 	}
 
 	

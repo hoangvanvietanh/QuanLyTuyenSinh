@@ -86,9 +86,6 @@ public class LoginController {
 				Model.studentsRestrationList.clear();
 				Model.adminList.clear();
 				Model model = new Model();
-				model.getAllStudent();
-				model.getAllStudentRegistration();
-				model.getAllHistory();
 				model.getAllAdmin();
 			}
 			else
@@ -100,9 +97,6 @@ public class LoginController {
 				Model.studentsRestrationList.clear();
 				Model.adminList.clear();
 				Model model = new Model();
-				model.getAllStudent();
-				model.getAllStudentRegistration();
-				model.getAllHistory();
 				model.getAllAdmin();
 			}
 		

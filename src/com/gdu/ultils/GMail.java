@@ -1,5 +1,6 @@
 package com.gdu.ultils;
 
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 import javax.activation.DataHandler;
@@ -26,7 +27,8 @@ import javafx.scene.control.Alert.AlertType;
 public class GMail {
 	
 	public static void sendMail(StudentRegistration student) throws Exception {
-        System.out.println("Preparing to send email");
+        System.out.println("Kết nối email");
+        System.out.println(LocalDateTime.now().toString());
         Properties properties = new Properties();
 
         //Enable authentication
@@ -37,7 +39,7 @@ public class GMail {
         properties.put("mail.smtp.host", "smtp.gmail.com");
         //Set smtp port
         properties.put("mail.smtp.port", "587");
-
+        System.out.println(LocalDateTime.now().toString());
         //Your gmail address
         String myAccountEmail = "hoangvanvietanhh@gmail.com";
         //Your gmail password
@@ -50,18 +52,19 @@ public class GMail {
                 return new PasswordAuthentication(myAccountEmail, password);
             }
         });
-
+        System.out.println(LocalDateTime.now().toString());
         //Prepare email message
         Message message = prepareMessage(session, myAccountEmail, student.getEmail(), student);
-
+        System.out.println(LocalDateTime.now().toString());
         //Send mail
         Transport.send(message);
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Thông báo");
-		alert.setHeaderText("Thông báo trúng đã được gửi thành công");
-		alert.setContentText("Thí sinh: " + student.getFullName() + " Mã số: "+student.getStudentCode());
-		alert.showAndWait();
-        System.out.println("Message sent successfully");
+        System.out.println(LocalDateTime.now().toString());
+//		Alert alert = new Alert(AlertType.INFORMATION);
+//		alert.setTitle("Thông báo");
+//		alert.setHeaderText("Thông báo trúng đã được gửi thành công");
+//		alert.setContentText("Thí sinh: " + student.getFullName() + " Mã số: "+student.getStudentCode());
+//		alert.showAndWait();
+        System.out.println("Hoàn thành");
     }
 
 	public static void sendMailFail(StudentRegistration student) throws Exception {
@@ -126,7 +129,8 @@ public class GMail {
 
 	         // Part two is attachment
 	         messageBodyPart = new MimeBodyPart();
-	         String filename = GetCurrentPath.path() + "src/com/gdu/documents/reportTrungTuyen.pdf";
+	         String name = ChangeVietNamText.removeAccent(student.getFullName());
+	         String filename = GetCurrentPath.path() + "src/com/gdu/documents/" + student.getStudentCode()+"_"+name+".pdf";
 	         DataSource source = new FileDataSource(filename);
 	         messageBodyPart.setDataHandler(new DataHandler(source));
 	         messageBodyPart.setFileName(filename);
@@ -165,7 +169,8 @@ public class GMail {
 
 	         // Part two is attachment
 	         messageBodyPart = new MimeBodyPart();
-	         String filename = GetCurrentPath.path() + "src/com/gdu/documents/reportTrungTuyen.pdf";
+	         String name = ChangeVietNamText.removeAccent(student.getFullName());
+	         String filename = GetCurrentPath.path() + "src/com/gdu/documents/"+ student.getStudentCode()+"_"+name+".pdf";
 	         DataSource source = new FileDataSource(filename);
 	         messageBodyPart.setDataHandler(new DataHandler(source));
 	         messageBodyPart.setFileName(filename);

@@ -32,9 +32,9 @@
           <Font size="30.0" />
         </font>
       </Label>
-      <TextField id="code_login" fx:id="txtCodeLogin" layoutX="44.0" layoutY="110.0" prefHeight="39.1328125" prefWidth="239.0" promptText="Mã đăng nhập:quanlytuyensinh" />
+      <TextField id="code_login" fx:id="txtCodeLogin" layoutX="44.0" layoutY="110.0" prefHeight="39.1328125" prefWidth="239.0" promptText="Mã đăng nhập:quanlytuyensinh" text="quanlytuyensinh" />
       <Button id="btnLogin" layoutX="105.0" layoutY="270.0" mnemonicParsing="false" onAction="#btnDangNhapclick" prefHeight="39.1328125" prefWidth="110.0" text="Đăng nhập" textAlignment="CENTER" />
-      <PasswordField fx:id="txtPassword" layoutX="44.0" layoutY="172.0" prefHeight="39.1328125" prefWidth="239.0" promptText="Nhập mật khẩu:123456" />
+      <PasswordField fx:id="txtPassword" layoutX="44.0" layoutY="172.0" prefHeight="39.1328125" prefWidth="239.0" promptText="Nhập mật khẩu:123456" text="123456" />
             <Label fx:id="labelNotice" layoutX="66.0" layoutY="79.0" text="Tài khoản hoặc mật khẩu sai" textFill="#ee0606" visible="false" />
             <JFXRadioButton fx:id="radOnline" layoutX="70.0" layoutY="235.0" text="Online">
                <toggleGroup>

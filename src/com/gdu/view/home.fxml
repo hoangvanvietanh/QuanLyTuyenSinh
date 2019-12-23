@@ -23,14 +23,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="stageHome" prefHeight="520.0" prefWidth="1554.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.HomeController">
+<AnchorPane fx:id="stageHome" prefHeight="520.0" prefWidth="1299.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.HomeController">
 	<children>
-		<AnchorPane layoutX="193.0" prefHeight="510.0" prefWidth="771.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
+		<AnchorPane layoutX="193.0" prefHeight="520.0" prefWidth="1152.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="193.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<effect>
 				<DropShadow />
 			</effect>
 			<children>
-            <BorderPane fx:id="paneTableView2" layoutX="16.0" layoutY="80.0" prefHeight="440.0" prefWidth="1089.0">
+				<Pane fx:id="pane3" layoutX="16.0" prefHeight="520.0" prefWidth="1064.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="77.0" AnchorPane.topAnchor="0.0">
+					<children>
+						<GlyphsBrowser layoutY="8.0" prefHeight="374.0" prefWidth="563.0" />
+					</children>
+				</Pane>
+            <BorderPane fx:id="paneTableView2" layoutX="16.0" layoutY="80.0" prefHeight="440.0" prefWidth="1136.0">
                <top>
                   <Pane prefHeight="0.0" prefWidth="1089.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
                </top>
@@ -44,11 +49,11 @@
                   <Pane prefHeight="9.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
                </bottom>
                <center>
-                  <ScrollPane prefHeight="429.0" prefWidth="1016.0" BorderPane.alignment="CENTER">
+                  <ScrollPane prefHeight="431.0" prefWidth="1052.0" BorderPane.alignment="CENTER">
                      <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="427.0" prefWidth="1070.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="432.0" prefWidth="920.0">
                            <children>
-                              <TableView fx:id="tbDataBasic" layoutX="99.0" layoutY="23.0" onMouseClicked="#btnSelectedRow2" prefHeight="398.0" prefWidth="1051.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="23.0">
+                              <TableView fx:id="tbDataBasic" layoutX="99.0" layoutY="23.0" onMouseClicked="#btnSelectedRow2" prefHeight="404.0" prefWidth="1324.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-9.0" AnchorPane.topAnchor="23.0">
                                  <columns>
                                     <TableColumn fx:id="stt1" prefWidth="48.0" text="STT" />
                                     <TableColumn fx:id="full_name_tbv2" prefWidth="195.0" text="Họ tên" />
@@ -67,27 +72,27 @@
                   </ScrollPane>
                </center>
             </BorderPane>
-				<BorderPane fx:id="paneStudent" layoutX="16.0" prefHeight="510.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<BorderPane fx:id="paneStudent" layoutX="16.0" prefHeight="520.0" prefWidth="1136.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<top>
-						<Pane prefHeight="80.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+						<Pane prefHeight="80.0" prefWidth="1101.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
 							<children>
 								<Label layoutX="195.0" layoutY="14.0" text="Quản lý sinh viên">
 									<font>
 										<Font size="20.0" />
 									</font>
 								</Label>
-								<JFXButton fx:id="btnRegistration" alignment="BASELINE_LEFT" layoutX="232.0" layoutY="44.0" onAction="#btnRegistrationClicked" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ede8da;" text="Đăng ký">
+								<JFXButton fx:id="btnRegistration" alignment="BASELINE_LEFT" layoutX="182.0" layoutY="44.0" onAction="#btnRegistrationClicked" prefHeight="30.0" prefWidth="100.0" style="-fx-background-color: #ede8da;" text="Đăng ký">
 									<graphic>
 										<FontAwesomeIcon iconName="PLUS" size="1.5em" />
 									</graphic>
 								</JFXButton>
-								<JFXButton alignment="BASELINE_LEFT" layoutX="346.0" layoutY="44.0" onAction="#reportClicked" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #ede8da;" text="Xuất file Excel">
+								<JFXButton alignment="BASELINE_LEFT" layoutX="297.0" layoutY="44.0" onAction="#reportClicked" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #ede8da;" text="Xuất file Excel">
 									<graphic>
 										<FontAwesomeIcon iconName="FILE" size="1.5em" />
 									</graphic>
 								</JFXButton>
-                        <JFXComboBox fx:id="cbViewTable" layoutX="503.0" layoutY="46.0" onAction="#cbViewTableSelected" prefHeight="26.0" prefWidth="228.0" promptText="Xem thông tin điểm" />
-                        <JFXTextField fx:id="txtSearch" layoutX="14.0" layoutY="46.0" onKeyReleased="#searchPress" prefHeight="26.0" prefWidth="212.0" promptText="Tìm kiếm" />
+                        <JFXComboBox fx:id="cbViewTable" layoutX="447.0" layoutY="46.0" onAction="#cbViewTableSelected" prefHeight="26.0" prefWidth="176.0" promptText="Xem thông tin điểm" />
+                        <JFXTextField fx:id="txtSearch" layoutX="14.0" layoutY="46.0" onKeyReleased="#searchPress" prefHeight="26.0" prefWidth="160.0" promptText="Tìm kiếm" />
 							</children>
 						</Pane>
 					</top>
@@ -101,11 +106,11 @@
 						<Pane prefHeight="9.0" prefWidth="563.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER" />
 					</bottom>
                <center>
-                  <ScrollPane prefHeight="421.0" prefWidth="1074.0" BorderPane.alignment="CENTER">
+                  <ScrollPane prefHeight="431.0" prefWidth="1114.0" BorderPane.alignment="CENTER">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="1325.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="1336.0">
                            <children>
-                              <TableView fx:id="tbData" layoutX="99.0" layoutY="48.0" onMouseClicked="#btnSelectedRow" prefHeight="421.0" prefWidth="1140.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-90.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tbData" layoutX="99.0" layoutY="48.0" onMouseClicked="#btnSelectedRow" prefHeight="421.0" prefWidth="832.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                               <columns>
 								<TableColumn fx:id="stt" prefWidth="48.0" text="STT" />
 								<TableColumn fx:id="full_name" prefWidth="156.0" text="Họ tên" />
@@ -127,7 +132,6 @@
 										<TableColumn fx:id="literature_scores" prefWidth="55.0" text="Văn" />
 									</columns>
 								</TableColumn>
-                                    <TableColumn fx:id="guest" prefWidth="123.0" text="Dự đoán" />
                                     <TableColumn fx:id="major" prefWidth="123.0" text="Ngành học" />
                                     <TableColumn fx:id="status" prefWidth="123.0" text="Trạng thái" />
 							</columns>
@@ -138,12 +142,7 @@
                   </ScrollPane>
                </center>
 				</BorderPane>
-				<Pane fx:id="pane3" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: red;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-					<children>
-						<GlyphsBrowser layoutY="8.0" prefHeight="374.0" prefWidth="563.0" />
-					</children>
-				</Pane>
-				<Pane fx:id="paneHome" layoutX="16.0" prefHeight="510.0" prefWidth="774.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+				<Pane fx:id="paneHome" layoutX="16.0" prefHeight="520.0" prefWidth="1136.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 					<children>
 						<HBox layoutY="52.0" prefHeight="100.0" prefWidth="872.0">
 							<children>

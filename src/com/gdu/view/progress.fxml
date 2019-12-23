@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="indexPane" prefHeight="304.0" prefWidth="484.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.gdu.controller.ProgressController">
+   <children>
+      <Pane fx:id="paneQuesion" prefHeight="271.0" prefWidth="484.0" style="-fx-background-color: white;">
+         <children>
+            <JFXButton fx:id="btnAgree" layoutX="89.0" layoutY="136.0" onAction="#btnAgreeClicked" prefHeight="45.0" prefWidth="104.0" text="Đồng ý" />
+            <JFXButton fx:id="btnExit" layoutX="269.0" layoutY="136.0" onAction="#btnExitClicked" prefHeight="45.0" prefWidth="104.0" text="Thoát" />
+            <Label fx:id="labelNotice" layoutX="89.0" layoutY="73.0" text="Bạn có chắc chắn muốn tiếp tục ?">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane fx:id="paneProgress" prefHeight="304.0" prefWidth="484.0">
+         <children>
+            <JFXProgressBar fx:id="barProgress" layoutX="7.0" layoutY="25.0" prefHeight="15.0" prefWidth="449.0" progress="0.0" />
+            <ScrollPane layoutX="7.0" layoutY="70.0" prefHeight="192.0" prefWidth="475.0">
+              <content>
+                <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="470.0" prefWidth="456.0" />
+              </content>
+            </ScrollPane>
+            <ProgressIndicator fx:id="progressIndicator" layoutX="442.0" layoutY="18.0" prefHeight="54.0" prefWidth="29.0" progress="0.0" />
+            <JFXButton fx:id="btnStart" layoutX="6.0" layoutY="277.0" onAction="#btnStart" prefHeight="26.0" prefWidth="475.0" text="Bắt đầu" />
+         </children></Pane>
+   </children>
+</AnchorPane>

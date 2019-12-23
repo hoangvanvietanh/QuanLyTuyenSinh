@@ -7,6 +7,8 @@ import java.util.HashMap;
  
 import javax.swing.JFrame;
 
+import com.gdu.entity.StudentRegistration;
+import com.gdu.ultils.ChangeVietNamText;
 import com.gdu.ultils.GetCurrentPath;
 
 import javafx.stage.Stage;
@@ -27,13 +29,14 @@ public class PrintReport extends JFrame {
     private static final long serialVersionUID = 1L;
  
     public static void main(String[] args) throws ClassNotFoundException, JRException, SQLException {
-    	PrintReport r = new PrintReport();
-    	r.showReport("Hoàng Văn Việt Anh","10/7/1998","Hải Dương","025899331");
+    	//PrintReport r = new PrintReport();
+    	//r.showReport("Hoàng Văn Việt Anh","10/7/1998","Hải Dương","025899331");
 	}
     
-    public void showReport(String name, String dateOfBirth, String placeOfBirth, String cmnd) throws JRException, ClassNotFoundException, SQLException {
- 
-        String reportSrcFile = GetCurrentPath.path()+ "src/com/gdu/reports/formTrungTuyen.jrxml";
+    public void showReport(StudentRegistration studentRegistration) throws JRException, ClassNotFoundException, SQLException {
+    	 String name = ChangeVietNamText.removeAccent(studentRegistration.getFullName());
+    	 String placeOfBirth = ChangeVietNamText.removeAccent(studentRegistration.getPlaceOfBirth());
+        String reportSrcFile = GetCurrentPath.path()+ "src/com/gdu/reports/formTruotTuyen.jrxml";
  
         // First, compile jrxml file.
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
@@ -41,9 +44,9 @@ public class PrintReport extends JFrame {
         HashMap<String, Object> parameters = new HashMap<String, Object>();
  
         parameters.put("name", name);
-        parameters.put("dateOfBirth", dateOfBirth);
-        parameters.put("placeOfBirth", placeOfBirth);
-        parameters.put("cmnd", cmnd);
+        parameters.put("dateOfBirth", studentRegistration.getDateOfBirth());
+        parameters.put("placeOfBirth",placeOfBirth);
+        parameters.put("cmnd", studentRegistration.getIdOfStudent());
  
         ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
         list.add(parameters);
@@ -61,9 +64,63 @@ public class PrintReport extends JFrame {
 
         File file = new File(realPath);
         file.mkdirs();
-        JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath() +"/reportTrungTuyen.pdf");
-        JasperExportManager.exportReportToHtmlFile(print, file.getAbsolutePath() +"/reportTrungTuyen.html");
-        System.out.println(file.getAbsolutePath() +"ok");
+        JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath() +"/"+ studentRegistration.getStudentCode()+"_"+name+".pdf");
     }
+    
+    public void saveReport(StudentRegistration studentRegistration) throws JRException, ClassNotFoundException, SQLException {
+    	 String name = ChangeVietNamText.removeAccent(studentRegistration.getFullName());
+    	 String placeOfBirth = ChangeVietNamText.removeAccent(studentRegistration.getPlaceOfBirth());
+        String reportSrcFile = GetCurrentPath.path()+ "src/com/gdu/reports/formTrungTuyen.jrxml";
+ 
+        // First, compile jrxml file.
+        JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
+        // Fields for report
+        HashMap<String, Object> parameters = new HashMap<String, Object>();
+ 
+        parameters.put("name", name);
+        parameters.put("dateOfBirth", studentRegistration.getDateOfBirth());
+        parameters.put("placeOfBirth", placeOfBirth);
+        parameters.put("cmnd", studentRegistration.getIdOfStudent());
+ 
+        ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+        list.add(parameters);
+ 
+        JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(list);
+        JasperPrint print = JasperFillManager.fillReport(jasperReport, null, beanColDataSource);
+        String realPath = GetCurrentPath.path() + "src/com/gdu/documents/";
+
+        File file = new File(realPath);
+        file.mkdirs();
+        String fileName = "/"+ studentRegistration.getStudentCode()+"_"+name+".pdf";
+        JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath() +fileName);
+    }
+    
+    public void saveReportFail(StudentRegistration studentRegistration) throws JRException, ClassNotFoundException, SQLException {
+   	 String name = ChangeVietNamText.removeAccent(studentRegistration.getFullName());
+   	 String placeOfBirth = ChangeVietNamText.removeAccent(studentRegistration.getPlaceOfBirth());
+       String reportSrcFile = GetCurrentPath.path()+ "src/com/gdu/reports/formTruotTuyen.jrxml";
+
+       // First, compile jrxml file.
+       JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
+       // Fields for report
+       HashMap<String, Object> parameters = new HashMap<String, Object>();
+
+       parameters.put("name", name);
+       parameters.put("dateOfBirth", studentRegistration.getDateOfBirth());
+       parameters.put("placeOfBirth", placeOfBirth);
+       parameters.put("cmnd", studentRegistration.getIdOfStudent());
+
+       ArrayList<HashMap<String, Object>> list = new ArrayList<HashMap<String, Object>>();
+       list.add(parameters);
+
+       JRBeanCollectionDataSource beanColDataSource = new JRBeanCollectionDataSource(list);
+       JasperPrint print = JasperFillManager.fillReport(jasperReport, null, beanColDataSource);
+       String realPath = GetCurrentPath.path() + "src/com/gdu/documents/";
+
+       File file = new File(realPath);
+       file.mkdirs();
+       String fileName = "/"+ studentRegistration.getStudentCode()+"_"+name+".pdf";
+       JasperExportManager.exportReportToPdfFile(print, file.getAbsolutePath() +fileName);
+   }
  
 }

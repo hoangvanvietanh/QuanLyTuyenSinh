@@ -83,8 +83,8 @@
 				<textFieldExpression><![CDATA[$F{cmnd}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="60" y="68" width="420" height="30" uuid="d65df296-dded-4960-a554-b2a588adfab9"/>
-				<text><![CDATA[Congratulations on your admission to the Gia Dinh international university.]]></text>
+				<reportElement x="42" y="70" width="470" height="30" uuid="d65df296-dded-4960-a554-b2a588adfab9"/>
+				<text><![CDATA[You are not eligible for admission, thank you for choosing Gia Dinh international university.]]></text>
 			</staticText>
 		</band>
 	</detail>
